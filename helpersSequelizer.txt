@@ -1,0 +1,30 @@
+# Add uuid
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+# Generar las migraciones
+npx sequelize-cli db:migrate
+
+# Añadir los seeders
+npx sequelize-cli db:seed:all
+
+## Aplicar migraciones desde cd .\src\
+
+npx sequelize-cli model:generate --name User attributes id:uuid,name:string,email:string,password_hash:string,role:enum,is_active:boolean,created_at:date,updated_at:date
+
+npx sequelize-cli model:generate --name RefreshToken attributes token:string,user_id:uuid,created_at:date,revoked:boolean
+
+npx sequelize-cli model:generate --name Notification --attributes id:uuid, sender_id:uuid, receiver_id:uuid, message:text, is_read:boolean, created_at:date
+
+npx sequelize-cli model:generate --name Document --attributes id:uuid,user_id:uuid,filename:text,mimetype:text,storage_path:text,type:text,created_at:date
+
+npx sequelize-cli model:generate --name Activity --attributes id:uuid,title:text,description:text,date:date,created_by:uuid,created_at:date
+
+npx sequelize-cli migration:generate --name create-activity-volunteers
+
+npx sequelize-cli model:generate --name WorkLog --attributes id:uuid,user_id:uuid,activity_id:uuid,week_start:date,hours:time,notes:text,created_at:date,updated_at:date
+
+
+## Seeders
+npx sequelize-cli seed:generate --name demo-users
+npx sequelize-cli seed:generate --name demo-activities
+
