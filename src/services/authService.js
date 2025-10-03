@@ -1,16 +1,16 @@
-const { User, RefreshToken, Activity } = require('../models');
-const bcrypt = require('bcrypt');
-const { VOLUNTEER } = require('../constants/roles');
+const { User, RefreshToken, Activity } = require("../models");
+const bcrypt = require("bcrypt");
+const { VOLUNTEER } = require("../constants/roles");
 const {
   ConflictError,
   CredentialError,
   NotFoundError,
-} = require('../errors/ErrorTypes');
+} = require("../errors/ErrorTypes");
 const {
   signAccessToken,
   signRefreshToken,
   verifyRefreshToken,
-} = require('../utils/jwt');
+} = require("../utils/jwt");
 
 const SALT_ROUNDS = 10;
 
@@ -26,7 +26,7 @@ exports.register = async ({
   // ! Check for duplicate email
   const existing = await User.findOne({ where: { email } });
   console.log(existing);
-  if (existing) throw new ConflictError('Email already registered');
+  if (existing) throw new ConflictError("Email already registered");
 
   // * Hash password before storage
   const password_hash = await bcrypt.hash(password, SALT_ROUNDS);
@@ -48,11 +48,11 @@ exports.register = async ({
 exports.checkCredentials = async (email, password) => {
   // ? Fetch active user only
   const user = await User.findOne({ where: { email, is_active: true } });
-  if (!user) throw new CredentialError('Invalid credentials');
+  if (!user) throw new CredentialError("Invalid credentials");
 
   // ! Compare provided password with stored hash
   const ok = await bcrypt.compare(password, user.password_hash);
-  if (!ok) throw new CredentialError('Invalid credentials');
+  if (!ok) throw new CredentialError("Invalid credentials");
   return user;
 };
 
@@ -81,14 +81,14 @@ exports.refresh = async (refreshToken) => {
   const token = await RefreshToken.findOne({
     where: { token: refreshToken },
   });
-  if (!token) throw new NotFoundError('Invalid refresh token');
+  if (!token) throw new NotFoundError("Invalid refresh token");
 
   // ? Decode and validate refresh token payload
   const payload = verifyRefreshToken(refreshToken);
   const user = await User.findOne({
     where: { id: payload.sub },
   });
-  if (!user) throw new NotFoundError('User not found');
+  if (!user) throw new NotFoundError("User not found");
 
   // * Return fresh access token
   return signAccessToken({
@@ -114,8 +114,8 @@ exports.getCurrentUser = async (id) => {
     include: [
       {
         model: Activity,
-        as: 'volunteerActivities',
-        attributes: ['id', 'title', 'description', 'date'],
+        as: "volunteerActivities",
+        attributes: ["id", "title", "description", "date"],
         through: { attributes: [] }, // * Exclude junction table fields
       },
     ],

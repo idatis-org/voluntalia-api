@@ -1,5 +1,5 @@
-const authService = require('../services/authService');
-const roles = require('../constants/roles');
+const authService = require("../services/authService");
+const roles = require("../constants/roles");
 
 // * Register a new user
 exports.register = async (req, res, next) => {
@@ -17,13 +17,13 @@ exports.register = async (req, res, next) => {
     if (!name || !email || !password) {
       return res
         .status(400)
-        .json({ error: 'name, email and password are required' });
+        .json({ error: "name, email and password are required" });
     }
 
     // ? Restrict roles to allowed values
-    const allowed = ['COORDINATOR', 'VOLUNTEER', 'LEGAL'];
+    const allowed = ["COORDINATOR", "VOLUNTEER", "LEGAL"];
     if (!allowed.includes(role))
-      return res.status(400).json({ error: 'Invalid role' });
+      return res.status(400).json({ error: "Invalid role" });
 
     // * Create user via service layer
     const user = await authService.register({
@@ -73,7 +73,7 @@ exports.refresh = async (req, res, next) => {
 
     // ! Ensure refresh token is provided
     if (!refreshToken)
-      return res.status(400).json({ error: 'refreshToken required' });
+      return res.status(400).json({ error: "refreshToken required" });
 
     const accesToken = await authService.refresh(refreshToken);
     return res.status(201).json({ accesToken });
@@ -89,7 +89,7 @@ exports.logout = async (req, res, next) => {
 
     // ! Ensure refresh token is provided
     if (!refreshToken)
-      return res.status(400).json({ error: 'refreshToken required' });
+      return res.status(400).json({ error: "refreshToken required" });
 
     await authService.logout(refreshToken);
     return res.json({ ok: true });

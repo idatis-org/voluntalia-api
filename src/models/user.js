@@ -1,5 +1,5 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -10,16 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Un usuario puede crear muchas actividades
       User.hasMany(models.Activity, {
-        as: 'createdActivities',
-        foreignKey: 'created_by',
+        as: "createdActivities",
+        foreignKey: "created_by",
       });
 
       // Un usuario puede apuntarse a muchas actividades (N-N)
       User.belongsToMany(models.Activity, {
-        as: 'volunteerActivities',
-        through: 'activity_volunteers',
-        foreignKey: 'volunteer_id',
-        otherKey: 'activity_id',
+        as: "volunteerActivities",
+        through: "activity_volunteers",
+        foreignKey: "volunteer_id",
+        otherKey: "activity_id",
         timestamps: false,
       });
     }
@@ -35,9 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       email: { type: DataTypes.TEXT, allowNull: false, unique: true },
       password_hash: { type: DataTypes.TEXT, allowNull: false },
       role: {
-        type: DataTypes.ENUM('COORDINATOR', 'VOLUNTEER', 'LEGAL'),
+        type: DataTypes.ENUM("COORDINATOR", "VOLUNTEER", "LEGAL"),
         allowNull: false,
-        defaultValue: 'VOLUNTEER',
+        defaultValue: "VOLUNTEER",
       },
       is_active: {
         type: DataTypes.BOOLEAN,
@@ -63,8 +63,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'User',
-      tableName: 'users',
+      modelName: "User",
+      tableName: "users",
       underscored: true,
       timestamps: false,
     }
