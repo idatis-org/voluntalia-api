@@ -1,4 +1,4 @@
-const { NotFoundError } = require("../errors/ErrorTypes");
+const { NotFoundError } = require("../errors/errorTypes");
 const path = require("path");
 const fs = require("fs");
 const { Document } = require("../models");

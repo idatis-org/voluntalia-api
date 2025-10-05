@@ -1,5 +1,5 @@
 const roles = require('../constants/roles');
-const { NotFoundError } = require('../errors/ErrorTypes');
+const { NotFoundError } = require('../errors/errorTypes');
 const { User, Notification } = require('../models');
 
 exports.sendAllVolunteer = async (senderId, message) => {
