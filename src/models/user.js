@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'created_by',
       });
 
+      User.hasMany(models.WorkLog, {
+        as: 'workLogs',
+        foreignKey: 'user_id', // Make sure this matches your WorkLog model
+      });
+
       // Un usuario puede apuntarse a muchas actividades (N-N)
       User.belongsToMany(models.Activity, {
         as: 'volunteerActivities',
