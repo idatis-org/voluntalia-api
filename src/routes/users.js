@@ -12,6 +12,6 @@ const router = express.Router();
  * This path will serve as the basis for the coordinator's future volunteer page.
  */
 
-router.get('/', requireAuth, authorizeRoles(roles.COORDINATOR), getAllUsers)
+router.get('/', requireAuth, authorizeRoles(roles.COORDINATOR), getAllUsers);
 
 module.exports = router;
