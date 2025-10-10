@@ -11,6 +11,7 @@ exports.register = async (req, res, next) => {
       role = roles.VOLUNTEER,
       country,
       city,
+      skills,
     } = req.body;
 
     // ! Validate required fields
@@ -33,6 +34,7 @@ exports.register = async (req, res, next) => {
       role,
       country,
       city,
+      skills
     });
     return res.status(201).json({ user });
   } catch (err) {

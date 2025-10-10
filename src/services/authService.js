@@ -22,6 +22,7 @@ exports.register = async ({
   role = VOLUNTEER,
   country,
   city,
+  skills
 }) => {
   // ! Check for duplicate email
   const existing = await User.findOne({ where: { email } });
@@ -38,6 +39,10 @@ exports.register = async ({
     country,
     city,
   });
+
+  if (skills && skills.length) {
+    await user.addSkills(skills);
+  }
 
   // ? Return only safe fields
   const { id, created_at } = user;
