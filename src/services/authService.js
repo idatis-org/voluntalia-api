@@ -5,7 +5,7 @@ const {
   ConflictError,
   CredentialError,
   NotFoundError,
-} = require('../errors/ErrorTypes');
+} = require('../errors/errorTypes');
 const {
   signAccessToken,
   signRefreshToken,

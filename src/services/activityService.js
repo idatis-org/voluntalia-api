@@ -1,3 +1,4 @@
+const { NotFoundError } = require("../errors/errorTypes");
 const { Activity, User } = require("../models");
 
 // * Create a new activity (coordinator only)
@@ -40,13 +41,14 @@ exports.deleteActivity = async (id) => {
 // ! Assign a single volunteer to an activity (replaces any existing)
 exports.assignActivity = async (id, volunteer_id) => {
   const activity = await Activity.findByPk(id);
+  if (!activity) throw new NotFoundError("Activity not found");
   await activity.setVolunteers([volunteer_id]);
 };
 
 // ! Remove a specific volunteer from an activity
 exports.unassignActivity = async (id, volunteer_id) => {
   const activity = await Activity.findByPk(id);
-  if (!activity) throw new Error("Activity not found");
+  if (!activity) throw new NotFoundError("Activity not found");
 
   await activity.removeVolunteer(volunteer_id);
 };

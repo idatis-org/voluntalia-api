@@ -1,5 +1,5 @@
 const { UniqueConstraintError, ValidationError } = require('sequelize');
-const ConflictError = require('../errors/ErrorTypes');
+const ConflictError = require('../errors/errorTypes');
 
 module.exports = (err, _req, res, _next) => {
   let status = err.status || err.statusCode || 500;

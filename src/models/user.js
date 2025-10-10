@@ -1,5 +1,7 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -27,6 +29,14 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'activity_id',
         timestamps: false,
       });
+
+      User.belongsToMany(models.Skill, {
+        as: 'skills',
+        through: 'skills_users',
+        foreignKey: 'user_id',
+        otherKey: 'skill_id',
+        timestamps: false,
+      });
     }
   }
   User.init(
@@ -44,11 +54,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: 'VOLUNTEER',
       },
-      is_active: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
-      },
+      is_active: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
       phone: {
         type: DataTypes.STRING,
         allowNull: true,
