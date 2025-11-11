@@ -2,6 +2,15 @@ const documentService = require("../services/documentService");
 const fs = require("fs").promises;
 const path = require("path");
 
+exports.getAllDocuments = async (req, res, next) => {
+  try {
+    const documents = await documentService.getAllDocuments();
+    res.status(200).json({ documents });
+  } catch (err) {
+    next(err);
+  }
+};
+
 // * Save uploaded file metadata and return the new document record
 exports.saveDocument = async (req, res, next) => {
   let filePath = null;
@@ -13,14 +22,14 @@ exports.saveDocument = async (req, res, next) => {
     const { type = "OTHER" } = req.body;
     const sub = req.user.sub;
     const { originalname, mimetype, filename, path } = req.file;
-    filePath = path;
+    filePath = documentService.changePath(path);
 
     // * Persist document info in DB
     const document = await documentService.saveDocument(
       sub,
       originalname,
       mimetype,
-      path,
+      filePath,
       type
     );
     res.status(201).json({ document });
@@ -49,4 +58,24 @@ exports.downloadDocument = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+// * Fetch all document categories
+exports.getCategories = async (req, res, next) => {
+  try {
+    const categories = await documentService.getCategories();
+    res.status(200).json({ categories });
+  } catch (err) {
+    next(err);
+  } 
+}
+
+// * Fetch all document types
+exports.getTypes = async (req, res, next) => {
+  try {
+    const types = await documentService.getTypes();
+    res.status(200).json({ types });
+  } catch (err) {
+    next(err);
+  } 
 };
