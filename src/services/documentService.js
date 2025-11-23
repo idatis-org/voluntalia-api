@@ -25,20 +25,31 @@ exports.getAllDocuments = async () => {
 };
 
 // * Persist document metadata in the database
-exports.saveDocument = async (user_id, filename, mimetype, storage_path, type) => {
+exports.saveDocument = async (fileToSave) => {
   return await Document.create({
-    user_id,
-    filename,
-    mimetype,
-    storage_path,
-    type,
-    description: 'PRUEBA'
+    user_id: fileToSave.user_id,
+    filename: fileToSave.filename,
+    mimetype: fileToSave.mimetype,
+    storage_path: fileToSave.storage_path,
+    category_id: fileToSave.category_id,
+    type: fileToSave.type,
+    resource_type_id: fileToSave.resource_type_id,
+    size: fileToSave.size,
+    description: fileToSave.description,
+    format: fileToSave.format,
+    tags: fileToSave.tags
   });
 };
 
 // ? Retrieve document record by ID (file existence not checked here)
 exports.downloadDocument = async (id) => {
-  return await Document.findByPk(id);
+  const doc = await Document.findByPk(id);
+  if (!doc) return null;
+
+  doc.downloads += 1; 
+  await doc.save();   
+
+  return doc;
 };
 
 // * Fetch all document categories
@@ -57,3 +68,20 @@ exports.getTypes = async () => {
   });
   return types;
 }
+
+// * Delete document by ID
+exports.deleteDocument = async (id) => {
+  const document = await Document.findByPk(id);
+  if (!document) {
+    throw new NotFoundError("Document not found");
+  }
+  const rel = document.storage_path.split('\\files\\')[1];
+  console.log(rel);
+  console.log(process.env.PIVOT);
+  const absoluteUrl = path.join(process.env.PIVOT, rel);
+
+  fs.unlinkSync(absoluteUrl);
+
+  await document.destroy();
+
+};

@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       format:           { type: DataTypes.STRING, allowNull: true, defaultValue: '' },
       size:             { type: DataTypes.STRING, allowNull: true, defaultValue: '' },
       downloads:        { type: DataTypes.INTEGER, allowNull: true, defaultValue: 0 },
+      tags:             { type: DataTypes.STRING, allowNull: true, defaultValue: '' },
     },
     {
       sequelize,
