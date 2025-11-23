@@ -9,7 +9,7 @@ module.exports = {
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       created_by: {
         type: Sequelize.UUID,
@@ -24,7 +24,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('skills');
-  }
+  },
 };

@@ -1,25 +1,25 @@
 const skillService = require('../services/skillService');
 
 exports.create = async (req, res, next) => {
-    try {
-        const { name } = req.body;
-        const sub = req.user.sub;
-        if (!name) return res.status(400).json({ error: "name is required" });
-        const skill = await skillService.create(name, sub);
-        res.status(201).json({skill});
-    } catch (err) {
-        next(err);
-    }
-}
+  try {
+    const { name } = req.body;
+    const sub = req.user.sub;
+    if (!name) return res.status(400).json({ error: 'name is required' });
+    const skill = await skillService.create(name, sub);
+    res.status(201).json({ skill });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.getAllSkills = async (req, res, next) => {
-    try {
-        const skills = await skillService.getAll();
-        res.status(201).json({skills});
-    } catch (err) {
-        next(err);
-    }
-}
+  try {
+    const skills = await skillService.getAll();
+    res.status(201).json({ skills });
+  } catch (err) {
+    next(err);
+  }
+};
 
 // ! Coordinator-only: update an existing skill
 exports.update = async (req, res, next) => {
@@ -54,7 +54,7 @@ exports.assignSkill = async (req, res, next) => {
 
     // ! Validate required field
     if (!volunteer_id)
-      return res.status(400).json({ error: "volunteer_id required" });
+      return res.status(400).json({ error: 'volunteer_id required' });
 
     await skillService.assignSkill(id, volunteer_id);
     res.status(201).json({ ok: true });
@@ -71,7 +71,7 @@ exports.unassignSkill = async (req, res, next) => {
 
     // ! Validate required field
     if (!volunteer_id)
-      return res.status(400).json({ error: "volunteer_id required" });
+      return res.status(400).json({ error: 'volunteer_id required' });
 
     await skillService.unassignSkill(id, volunteer_id);
     res.status(201).json({ ok: true });

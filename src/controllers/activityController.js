@@ -1,4 +1,4 @@
-const activityService = require("../services/activityService");
+const activityService = require('../services/activityService');
 
 // ! Coordinator-only: create a new activity
 exports.create = async (req, res, next) => {
@@ -8,7 +8,7 @@ exports.create = async (req, res, next) => {
 
     // ! Validate required fields
     if (!title || !date)
-      return res.status(400).json({ error: "title and date are required" });
+      return res.status(400).json({ error: 'title and date are required' });
 
     const activity = await activityService.create(
       title,
@@ -65,7 +65,7 @@ exports.assignActivity = async (req, res, next) => {
 
     // ! Validate required field
     if (!volunteer_id)
-      return res.status(400).json({ error: "volunteer_id required" });
+      return res.status(400).json({ error: 'volunteer_id required' });
 
     await activityService.assignActivity(id, volunteer_id);
     res.status(201).json({ ok: true });
@@ -82,7 +82,7 @@ exports.unassignActivity = async (req, res, next) => {
 
     // ! Validate required field
     if (!volunteer_id)
-      return res.status(400).json({ error: "volunteer_id required" });
+      return res.status(400).json({ error: 'volunteer_id required' });
 
     await activityService.unassignActivity(id, volunteer_id);
     res.status(201).json({ ok: true });

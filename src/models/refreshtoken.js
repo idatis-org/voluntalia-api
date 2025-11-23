@@ -4,14 +4,21 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class RefreshToken extends Model {
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+      this.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+      });
     }
   }
   RefreshToken.init(
     {
       token: { type: DataTypes.TEXT, primaryKey: true },
       user_id: { type: DataTypes.UUID, allowNull: false },
-      revoked: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+      revoked: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
     {
       sequelize,

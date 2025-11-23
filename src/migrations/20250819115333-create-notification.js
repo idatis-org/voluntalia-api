@@ -20,7 +20,11 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       message: { type: Sequelize.TEXT, allowNull: false },
-      is_read: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
+      is_read: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
