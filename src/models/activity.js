@@ -20,7 +20,11 @@ module.exports = (sequelize, DataTypes) => {
 
   Activity.init(
     {
-      id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       title: { type: DataTypes.TEXT, allowNull: false },
       description: { type: DataTypes.TEXT },
       date: { type: DataTypes.DATEONLY, allowNull: false },

@@ -1,916 +1,810 @@
 {
-	"info": {
-		"_postman_id": "50fd61b8-231d-46a5-be6a-304e1b1280dc",
-		"name": "VoluntALIA",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16916515"
-	},
-	"item": [
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "http://localhost:4000/auth/register",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"angel\",\r\n    \"email\": \"angel@mail.com\",\r\n    \"password\": \"aaa111\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/auth/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/auth/login",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"davidmamao@mail.com\",\r\n    \"password\": \"aaa111\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/auth/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/auth/refresh",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZDY1N2QyMy0wOWJhLTRjZjMtYmUzNC04YjlhMjE1MTk3YzciLCJpYXQiOjE3NTYxMTEwNjYsImV4cCI6MTc1ODcwMzA2Nn0.BzPXLKuhDgsWbieyXjIW0r8TKoxTJhEepPnklJbvzsU\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/auth/refresh",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"auth",
-								"refresh"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/auth/logout",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZDY1N2QyMy0wOWJhLTRjZjMtYmUzNC04YjlhMjE1MTk3YzciLCJpYXQiOjE3NTYxMTEwNjYsImV4cCI6MTc1ODcwMzA2Nn0.BzPXLKuhDgsWbieyXjIW0r8TKoxTJhEepPnklJbvzsU\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/auth/logout",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"auth",
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/auth/me",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZDY1N2QyMy0wOWJhLTRjZjMtYmUzNC04YjlhMjE1MTk3YzciLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0QG1haWwuY29tIiwibmFtZSI6InRlc3QiLCJpYXQiOjE3NTYxMTQyMzMsImV4cCI6MTc1NjExNTEzM30.r8Wnt1HkhaNS_fH-IhZVNJLaYw1euJXgZ3TStIiAbOk",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/auth/me",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"auth",
-								"me"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "http://localhost:4000/users",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NjZhMGY0ZS02MTAxLTQ4NWYtOGQyNS1kMTg0NGEwNjI5YWMiLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0ZG9zQG1haWwuY29tIiwibmFtZSI6InRlc3Rkb3MiLCJpYXQiOjE3NTYxMjIxMTUsImV4cCI6MTc1NjEyMzAxNX0.xSnRf73E6dGldqlVz50tRMppL156w2QAB9upvR3Duwc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Notification",
-			"item": [
-				{
-					"name": "http://localhost:4000/notification/send",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTk4NDcsImV4cCI6MTc1NjEyMDc0N30.nTb_znS2f1-BnIpH1RzhYGmqXaixNQWhmqdFdT2I_uI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"message\": \"Sistema POOL notificacion user especifico 2\",\r\n    \"receiver_id\": \"866a0f4e-6101-485f-8d25-d1844a0629ac\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/notification/send",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"notification",
-								"send"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/notification/ac11aaf1-d33e-4514-8359-3f9f4da92d9d/read",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NjZhMGY0ZS02MTAxLTQ4NWYtOGQyNS1kMTg0NGEwNjI5YWMiLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0ZG9zQG1haWwuY29tIiwibmFtZSI6InRlc3Rkb3MiLCJpYXQiOjE3NTYxMjIxMTUsImV4cCI6MTc1NjEyMzAxNX0.xSnRf73E6dGldqlVz50tRMppL156w2QAB9upvR3Duwc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/notification/ac11aaf1-d33e-4514-8359-3f9f4da92d9d/read",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"notification",
-								"ac11aaf1-d33e-4514-8359-3f9f4da92d9d",
-								"read"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/notification",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NjZhMGY0ZS02MTAxLTQ4NWYtOGQyNS1kMTg0NGEwNjI5YWMiLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0ZG9zQG1haWwuY29tIiwibmFtZSI6InRlc3Rkb3MiLCJpYXQiOjE3NTYxMjIxMTUsImV4cCI6MTc1NjEyMzAxNX0.xSnRf73E6dGldqlVz50tRMppL156w2QAB9upvR3Duwc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/notification",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"notification"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Dashboard",
-			"item": [
-				{
-					"name": "http://localhost:4000/dashboard/stats",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTY1MjcsImV4cCI6MTc1NjExNzQyN30.Wkdsbr2Kb8JKRaiAx_Mkx9y3XEDI_ck6Hmj1Hc5CNIo",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/dashboard/stats",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"dashboard",
-								"stats"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/dashboard/users",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTY1MjcsImV4cCI6MTc1NjExNzQyN30.Wkdsbr2Kb8JKRaiAx_Mkx9y3XEDI_ck6Hmj1Hc5CNIo",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/dashboard/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"dashboard",
-								"users"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Document",
-			"item": [
-				{
-					"name": "http://localhost:4000/document",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTA4MzIsImV4cCI6MTc1NjE5MTczMn0.yHd4pdV16dNb14pUUMlkaCPeqOct6MxEu02k9327nv4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/C:/Users/david.ortega/OneDrive - Servitir 2000/Escritorio/nene.png"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:4000/document",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"document"
-							],
-							"query": [
-								{
-									"key": "file",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/document/download/115d78c7-157b-4d48-9dab-60c2f27f9b23",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTA4MzIsImV4cCI6MTc1NjE5MTczMn0.yHd4pdV16dNb14pUUMlkaCPeqOct6MxEu02k9327nv4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/document/download/115d78c7-157b-4d48-9dab-60c2f27f9b23",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"document",
-								"download",
-								"115d78c7-157b-4d48-9dab-60c2f27f9b23"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/document/downloadCertificate",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTI4NzYsImV4cCI6MTc1NjI5Mzc3Nn0.5wQhJ94uOFnGdSBgxV93dY7CgF2NXeLsGCJtDFkko-4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/document/downloadCertificate",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"document",
-								"downloadCertificate"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Activity",
-			"item": [
-				{
-					"name": "http://localhost:4000/activity/create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDQ0MDQsImV4cCI6MTc1NjIwNTMwNH0.xOlV7AQhhIsmV4c_ZNEaHRh4Aig_nKbbVcRJYx07WpQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Titulo\",\r\n    \"description\": \"Descripcion\",\r\n    \"date\": \"2025-08-26\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/activity/create",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"activity",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/activity",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTQ3MzIsImV4cCI6MTc1NjE5NTYzMn0.3x5hkT2tQmINEP9vFLb8fGTeABiAcKiCmByUoM19jcw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"SoliDARTIS\",\r\n    \"description\": \"Proyecto para ayudar a artistas a impulsar sus obras\",\r\n    \"date\": \"2025-09-26\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/activity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"activity"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTQ3MzIsImV4cCI6MTc1NjE5NTYzMn0.3x5hkT2tQmINEP9vFLb8fGTeABiAcKiCmByUoM19jcw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"SoliDARTIS\",\r\n    \"description\": \"Proyecto para ayudar a artistas a impulsar sus obras 2.0\",\r\n    \"date\": \"2025-09-30\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"activity",
-								"35fa48f7-c4ce-47a6-a635-6db4021caa56"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTYyNzYsImV4cCI6MTc1NjE5NzE3Nn0.-st1eaQE5VYZ5gRjAWTTe5WiLU-WZrNNDUNyyKb_KHY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"SoliDARTIS\",\r\n    \"description\": \"Proyecto para ayudar a artistas a impulsar sus obras 2.0\",\r\n    \"date\": \"2025-09-30\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"activity",
-								"35fa48f7-c4ce-47a6-a635-6db4021caa56"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/activity/:id/assign",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDQ0MDQsImV4cCI6MTc1NjIwNTMwNH0.xOlV7AQhhIsmV4c_ZNEaHRh4Aig_nKbbVcRJYx07WpQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"volunteer_id\" : \"76234e9d-23d7-487c-b90c-fcfeb65e55bc\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/activity/33ff86af-99da-4221-bbf9-521061922469/assign",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"activity",
-								"33ff86af-99da-4221-bbf9-521061922469",
-								"assign"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/activity/:id/volunteers",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDQ0MDQsImV4cCI6MTc1NjIwNTMwNH0.xOlV7AQhhIsmV4c_ZNEaHRh4Aig_nKbbVcRJYx07WpQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/activity/33ff86af-99da-4221-bbf9-521061922469/volunteers",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"activity",
-								"33ff86af-99da-4221-bbf9-521061922469",
-								"volunteers"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "WorkLog",
-			"item": [
-				{
-					"name": "http://localhost:4000/worklog/create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDc5NjAsImV4cCI6MTc1NjIwODg2MH0.4X6CD3a9-Edmun_7RA5YmKT6gVhGjPLFvIItAhU4InQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"activity_id\": \"33ff86af-99da-4221-bbf9-521061922469\",\r\n    \"week_start\": \"2025-08-18\",\r\n    \"hours\": \"5 hours\",\r\n    \"notes\": \"Hemos empezado a crear la arquitectura del proyecto backend de VolunTALIA\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/worklog/create",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"worklog",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/worklog/me",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDg5NjEsImV4cCI6MTc1NjIwOTg2MX0.sDZ_Sf_hJx3Jkw7p4k1k-wrH0vrLmtk5Hhe3J2W_UBc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"activity_id\": \"33ff86af-99da-4221-bbf9-521061922469\",\r\n    \"week_start\": \"2025-08-18\",\r\n    \"hours\": \"5 hours\",\r\n    \"notes\": \"Hemos empezado a crear la arquitectura del proyecto backend de VolunTALIA\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/worklog/me",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"worklog",
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/worklog/user/b7165bb8-48b3-4234-b407-1516064138bd",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDg5NjEsImV4cCI6MTc1NjIwOTg2MX0.sDZ_Sf_hJx3Jkw7p4k1k-wrH0vrLmtk5Hhe3J2W_UBc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"activity_id\": \"33ff86af-99da-4221-bbf9-521061922469\",\r\n    \"week_start\": \"2025-08-18\",\r\n    \"hours\": \"5 hours\",\r\n    \"notes\": \"Hemos empezado a crear la arquitectura del proyecto backend de VolunTALIA\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/worklog/user/b7165bb8-48b3-4234-b407-1516064138bd",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"worklog",
-								"user",
-								"b7165bb8-48b3-4234-b407-1516064138bd"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Logros",
-			"item": [
-				{
-					"name": "http://localhost:4000/achievement/check",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/achievement/check",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"achievement",
-								"check"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/achievement/me",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTE3NzEsImV4cCI6MTc1NjI5MjY3MX0.ckxfuzKyIC6Kw_D-_koz9KFyXbz0l5bvqCSa030ctYg",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/achievement/me",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"achievement",
-								"me"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "50fd61b8-231d-46a5-be6a-304e1b1280dc",
+    "name": "VoluntALIA",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "16916515"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "http://localhost:4000/auth/register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"angel\",\r\n    \"email\": \"angel@mail.com\",\r\n    \"password\": \"aaa111\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/auth/login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"davidmamao@mail.com\",\r\n    \"password\": \"aaa111\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/auth/refresh",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZDY1N2QyMy0wOWJhLTRjZjMtYmUzNC04YjlhMjE1MTk3YzciLCJpYXQiOjE3NTYxMTEwNjYsImV4cCI6MTc1ODcwMzA2Nn0.BzPXLKuhDgsWbieyXjIW0r8TKoxTJhEepPnklJbvzsU\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/auth/refresh",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["auth", "refresh"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/auth/logout",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZDY1N2QyMy0wOWJhLTRjZjMtYmUzNC04YjlhMjE1MTk3YzciLCJpYXQiOjE3NTYxMTEwNjYsImV4cCI6MTc1ODcwMzA2Nn0.BzPXLKuhDgsWbieyXjIW0r8TKoxTJhEepPnklJbvzsU\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/auth/logout",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["auth", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/auth/me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZDY1N2QyMy0wOWJhLTRjZjMtYmUzNC04YjlhMjE1MTk3YzciLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0QG1haWwuY29tIiwibmFtZSI6InRlc3QiLCJpYXQiOjE3NTYxMTQyMzMsImV4cCI6MTc1NjExNTEzM30.r8Wnt1HkhaNS_fH-IhZVNJLaYw1euJXgZ3TStIiAbOk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/auth/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["auth", "me"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "http://localhost:4000/users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NjZhMGY0ZS02MTAxLTQ4NWYtOGQyNS1kMTg0NGEwNjI5YWMiLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0ZG9zQG1haWwuY29tIiwibmFtZSI6InRlc3Rkb3MiLCJpYXQiOjE3NTYxMjIxMTUsImV4cCI6MTc1NjEyMzAxNX0.xSnRf73E6dGldqlVz50tRMppL156w2QAB9upvR3Duwc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["users"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notification",
+      "item": [
+        {
+          "name": "http://localhost:4000/notification/send",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTk4NDcsImV4cCI6MTc1NjEyMDc0N30.nTb_znS2f1-BnIpH1RzhYGmqXaixNQWhmqdFdT2I_uI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"message\": \"Sistema POOL notificacion user especifico 2\",\r\n    \"receiver_id\": \"866a0f4e-6101-485f-8d25-d1844a0629ac\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/notification/send",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["notification", "send"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/notification/ac11aaf1-d33e-4514-8359-3f9f4da92d9d/read",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NjZhMGY0ZS02MTAxLTQ4NWYtOGQyNS1kMTg0NGEwNjI5YWMiLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0ZG9zQG1haWwuY29tIiwibmFtZSI6InRlc3Rkb3MiLCJpYXQiOjE3NTYxMjIxMTUsImV4cCI6MTc1NjEyMzAxNX0.xSnRf73E6dGldqlVz50tRMppL156w2QAB9upvR3Duwc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/notification/ac11aaf1-d33e-4514-8359-3f9f4da92d9d/read",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": [
+                "notification",
+                "ac11aaf1-d33e-4514-8359-3f9f4da92d9d",
+                "read"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/notification",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NjZhMGY0ZS02MTAxLTQ4NWYtOGQyNS1kMTg0NGEwNjI5YWMiLCJyb2xlIjoiVk9MVU5URUVSIiwiZW1haWwiOiJ0ZXN0ZG9zQG1haWwuY29tIiwibmFtZSI6InRlc3Rkb3MiLCJpYXQiOjE3NTYxMjIxMTUsImV4cCI6MTc1NjEyMzAxNX0.xSnRf73E6dGldqlVz50tRMppL156w2QAB9upvR3Duwc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/notification",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["notification"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "http://localhost:4000/dashboard/stats",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTY1MjcsImV4cCI6MTc1NjExNzQyN30.Wkdsbr2Kb8JKRaiAx_Mkx9y3XEDI_ck6Hmj1Hc5CNIo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/dashboard/stats",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["dashboard", "stats"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/dashboard/users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTY1MjcsImV4cCI6MTc1NjExNzQyN30.Wkdsbr2Kb8JKRaiAx_Mkx9y3XEDI_ck6Hmj1Hc5CNIo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/dashboard/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["dashboard", "users"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Document",
+      "item": [
+        {
+          "name": "http://localhost:4000/document",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTA4MzIsImV4cCI6MTc1NjE5MTczMn0.yHd4pdV16dNb14pUUMlkaCPeqOct6MxEu02k9327nv4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/C:/Users/david.ortega/OneDrive - Servitir 2000/Escritorio/nene.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:4000/document",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["document"],
+              "query": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/document/download/115d78c7-157b-4d48-9dab-60c2f27f9b23",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTA4MzIsImV4cCI6MTc1NjE5MTczMn0.yHd4pdV16dNb14pUUMlkaCPeqOct6MxEu02k9327nv4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/document/download/115d78c7-157b-4d48-9dab-60c2f27f9b23",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": [
+                "document",
+                "download",
+                "115d78c7-157b-4d48-9dab-60c2f27f9b23"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/document/downloadCertificate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTI4NzYsImV4cCI6MTc1NjI5Mzc3Nn0.5wQhJ94uOFnGdSBgxV93dY7CgF2NXeLsGCJtDFkko-4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/document/downloadCertificate",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["document", "downloadCertificate"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Activity",
+      "item": [
+        {
+          "name": "http://localhost:4000/activity/create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDQ0MDQsImV4cCI6MTc1NjIwNTMwNH0.xOlV7AQhhIsmV4c_ZNEaHRh4Aig_nKbbVcRJYx07WpQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Titulo\",\r\n    \"description\": \"Descripcion\",\r\n    \"date\": \"2025-08-26\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/activity/create",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["activity", "create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/activity",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTQ3MzIsImV4cCI6MTc1NjE5NTYzMn0.3x5hkT2tQmINEP9vFLb8fGTeABiAcKiCmByUoM19jcw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"SoliDARTIS\",\r\n    \"description\": \"Proyecto para ayudar a artistas a impulsar sus obras\",\r\n    \"date\": \"2025-09-26\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/activity",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["activity"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTQ3MzIsImV4cCI6MTc1NjE5NTYzMn0.3x5hkT2tQmINEP9vFLb8fGTeABiAcKiCmByUoM19jcw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"SoliDARTIS\",\r\n    \"description\": \"Proyecto para ayudar a artistas a impulsar sus obras 2.0\",\r\n    \"date\": \"2025-09-30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["activity", "35fa48f7-c4ce-47a6-a635-6db4021caa56"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxOTYyNzYsImV4cCI6MTc1NjE5NzE3Nn0.-st1eaQE5VYZ5gRjAWTTe5WiLU-WZrNNDUNyyKb_KHY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"SoliDARTIS\",\r\n    \"description\": \"Proyecto para ayudar a artistas a impulsar sus obras 2.0\",\r\n    \"date\": \"2025-09-30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/activity/35fa48f7-c4ce-47a6-a635-6db4021caa56",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["activity", "35fa48f7-c4ce-47a6-a635-6db4021caa56"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/activity/:id/assign",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDQ0MDQsImV4cCI6MTc1NjIwNTMwNH0.xOlV7AQhhIsmV4c_ZNEaHRh4Aig_nKbbVcRJYx07WpQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"volunteer_id\" : \"76234e9d-23d7-487c-b90c-fcfeb65e55bc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/activity/33ff86af-99da-4221-bbf9-521061922469/assign",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": [
+                "activity",
+                "33ff86af-99da-4221-bbf9-521061922469",
+                "assign"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/activity/:id/volunteers",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDQ0MDQsImV4cCI6MTc1NjIwNTMwNH0.xOlV7AQhhIsmV4c_ZNEaHRh4Aig_nKbbVcRJYx07WpQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/activity/33ff86af-99da-4221-bbf9-521061922469/volunteers",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": [
+                "activity",
+                "33ff86af-99da-4221-bbf9-521061922469",
+                "volunteers"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "WorkLog",
+      "item": [
+        {
+          "name": "http://localhost:4000/worklog/create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDc5NjAsImV4cCI6MTc1NjIwODg2MH0.4X6CD3a9-Edmun_7RA5YmKT6gVhGjPLFvIItAhU4InQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"activity_id\": \"33ff86af-99da-4221-bbf9-521061922469\",\r\n    \"week_start\": \"2025-08-18\",\r\n    \"hours\": \"5 hours\",\r\n    \"notes\": \"Hemos empezado a crear la arquitectura del proyecto backend de VolunTALIA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/worklog/create",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["worklog", "create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/worklog/me",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDg5NjEsImV4cCI6MTc1NjIwOTg2MX0.sDZ_Sf_hJx3Jkw7p4k1k-wrH0vrLmtk5Hhe3J2W_UBc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"activity_id\": \"33ff86af-99da-4221-bbf9-521061922469\",\r\n    \"week_start\": \"2025-08-18\",\r\n    \"hours\": \"5 hours\",\r\n    \"notes\": \"Hemos empezado a crear la arquitectura del proyecto backend de VolunTALIA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/worklog/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["worklog", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/worklog/user/b7165bb8-48b3-4234-b407-1516064138bd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyMDg5NjEsImV4cCI6MTc1NjIwOTg2MX0.sDZ_Sf_hJx3Jkw7p4k1k-wrH0vrLmtk5Hhe3J2W_UBc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"activity_id\": \"33ff86af-99da-4221-bbf9-521061922469\",\r\n    \"week_start\": \"2025-08-18\",\r\n    \"hours\": \"5 hours\",\r\n    \"notes\": \"Hemos empezado a crear la arquitectura del proyecto backend de VolunTALIA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/worklog/user/b7165bb8-48b3-4234-b407-1516064138bd",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": [
+                "worklog",
+                "user",
+                "b7165bb8-48b3-4234-b407-1516064138bd"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Logros",
+      "item": [
+        {
+          "name": "http://localhost:4000/achievement/check",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/achievement/check",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["achievement", "check"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:4000/achievement/me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTE3NzEsImV4cCI6MTc1NjI5MjY3MX0.ckxfuzKyIC6Kw_D-_koz9KFyXbz0l5bvqCSa030ctYg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/achievement/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["achievement", "me"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }

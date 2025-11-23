@@ -14,7 +14,11 @@ module.exports = {
         allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),
       },
-      revoked: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
+      revoked: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     });
   },
   async down(queryInterface) {

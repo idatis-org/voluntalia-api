@@ -1,7 +1,5 @@
-const { VOLUNTEER } = require('../constants/roles');
 const { NotFoundError } = require('../errors/errorTypes');
 const { Activity, User } = require('../models');
-const sequelize = require('sequelize');
 
 // * Create a new activity (coordinator only)
 exports.create = async (title, description, date, sub) => {

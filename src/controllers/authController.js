@@ -157,7 +157,7 @@ exports.me = async (req, res, next) => {
 };
 
 // * Reset password using token
-exports.resetPassword = async (req, res, next) => {
+exports.resetPassword = async (req, res) => {
   try {
     const { token, newPassword } = req.body;
 
@@ -195,7 +195,7 @@ exports.resetPassword = async (req, res, next) => {
       success: true,
     });
   } catch (err) {
-    console.error(`❌ Password reset failed:`, {
+    console.error('❌ Password reset failed:', {
       error: err.message,
       token: req.body?.token?.substring(0, 10) + '...',
       timestamp: new Date().toISOString(),
