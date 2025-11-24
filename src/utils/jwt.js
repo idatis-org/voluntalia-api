@@ -3,14 +3,14 @@ const jwt = require('jsonwebtoken');
 // Config to sign access token
 function signAccessToken(payload) {
   return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: process.env.ACCESS_TOKEN_TTL || '30d',
+    expiresIn: process.env.ACCESS_TOKEN_TTL || '30d'
   });
 }
 
 // Config to sign refresh access token
 function signRefreshToken(payload) {
   return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: process.env.REFRESH_TOKEN_TTL || '30d',
+    expiresIn: process.env.REFRESH_TOKEN_TTL || '30d'
   });
 }
 
@@ -28,5 +28,5 @@ module.exports = {
   signAccessToken,
   signRefreshToken,
   verifyAccessToken,
-  verifyRefreshToken,
+  verifyRefreshToken
 };

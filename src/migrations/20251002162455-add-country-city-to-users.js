@@ -15,7 +15,7 @@ module.exports = {
     });
   },
 
-  async down(queryInterface) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.removeColumn('users', 'country');
     await queryInterface.removeColumn('users', 'city');
   },

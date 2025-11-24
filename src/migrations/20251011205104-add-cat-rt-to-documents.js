@@ -4,12 +4,12 @@ module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.addColumn('documents', 'category_id', {
       type: DataTypes.UUID,
-      references: { model: 'categories_documents', key: 'id' },
+      references: { model: 'categories_documents',      key: 'id' },
       onDelete: 'SET NULL',
     });
     await queryInterface.addColumn('documents', 'resource_type_id', {
       type: DataTypes.UUID,
-      references: { model: 'resource_types_documents', key: 'id' },
+      references: { model: 'resource_types_documents',  key: 'id' },
       onDelete: 'SET NULL',
     });
     await queryInterface.addColumn('documents', 'description', {

@@ -5,7 +5,7 @@ const errorHandler = require('./middleware/errorHandler');
 const { sequelize } = require('./models');
 require('dotenv').config();
 
-// Routes
+// Routes 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const notificationRoutes = require('./routes/notification');
@@ -29,7 +29,7 @@ app.use('/activity', activityRoutes);
 app.use('/worklog', workLogRoutes);
 app.use('/skill', skillRoutes);
 
-app.use(errorHandler); // * Middleware to manage errors
+app.use(errorHandler); // * Middleware to manage errors 
 
 const port = process.env.PORT || 4000;
 
