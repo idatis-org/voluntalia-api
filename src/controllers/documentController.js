@@ -1,7 +1,8 @@
-const documentService = require('../services/documentService');
-const fs = require('fs').promises;
-const https = require('https'); // usa require('http') si es HTTP
-const url = require('url');
+const documentService = require("../services/documentService");
+const fs = require("fs").promises;
+const path = require("path");
+const https   = require('https');   // usa require('http') si es HTTP
+const url     = require('url');
 
 exports.getAllDocuments = async (req, res, next) => {
   try {
@@ -19,7 +20,7 @@ exports.saveDocument = async (req, res, next) => {
     // ! Ensure a valid file was uploaded
     console.log(req.customer);
     if (!req.file)
-      return res.status(400).json({ error: 'No file or invalid type' });
+      return res.status(400).json({ error: "No file or invalid type" });
     console.log(req.body);
     const sub = req.user.sub;
     filePath = documentService.changePath(req.file.path);
@@ -34,7 +35,7 @@ exports.saveDocument = async (req, res, next) => {
       resource_type_id: req.body.resource_type_id,
       size: req.file.size,
       format: req.body.format,
-      tags: req.body.tags || '',
+      tags: req.body.tags || ''
     };
     console.log(fileToSave);
     // * Persist document info in DB
@@ -46,7 +47,7 @@ exports.saveDocument = async (req, res, next) => {
       try {
         await fs.unlink(filePath);
       } catch (unlinkErr) {
-        console.error('Error deleting file after failure:', unlinkErr);
+        console.error("Error deleting file after failure:", unlinkErr);
       }
     }
     next(err);
@@ -63,23 +64,20 @@ exports.downloadDocument = async (req, res, next) => {
     const parsed = new url.URL(fileUrl);
     const options = {
       hostname: parsed.hostname,
-      port: parsed.port || (parsed.protocol === 'https:' ? 443 : 80),
-      path: parsed.pathname + parsed.search,
-      method: 'GET',
+      port:     parsed.port || (parsed.protocol === 'https:' ? 443 : 80),
+      path:     parsed.pathname + parsed.search,
+      method:   'GET',
     };
     console.log(options);
 
-    // choose the correct client and make the request with a consistently indented callback
-    const client = parsed.protocol === 'https:' ? https : require('http');
-    const proxyReq = client.request(options, (remoteRes) => {
+    const proxyReq = (parsed.protocol === 'https:' ? https : require('http'))
+                      .request(options, (remoteRes) => {
+
       if (remoteRes.statusCode !== 200) {
         return res.sendStatus(remoteRes.statusCode);
       }
 
-      res.set(
-        'Content-Type',
-        remoteRes.headers['content-type'] || doc.mimetype
-      );
+      res.set('Content-Type', remoteRes.headers['content-type'] || doc.mimetype);
 
       const safeName = encodeURIComponent(doc.filename).replace(/['"]/g, '');
       res.set('Content-Disposition', `attachment; filename="${safeName}"`);
@@ -92,7 +90,7 @@ exports.downloadDocument = async (req, res, next) => {
 
       remoteRes.pipe(res);
     });
-    proxyReq.on('error', next);
+    proxyReq.on('error', next);   // si falla la conexión
     proxyReq.end();
   } catch (err) {
     next(err);
@@ -106,8 +104,8 @@ exports.getCategories = async (req, res, next) => {
     res.status(200).json({ categories });
   } catch (err) {
     next(err);
-  }
-};
+  } 
+}
 
 // * Fetch all document types
 exports.getTypes = async (req, res, next) => {
@@ -116,7 +114,7 @@ exports.getTypes = async (req, res, next) => {
     res.status(200).json({ types });
   } catch (err) {
     next(err);
-  }
+  } 
 };
 
 exports.deleteDocument = async (req, res, next) => {

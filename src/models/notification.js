@@ -27,11 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       sender_id: { type: DataTypes.UUID, allowNull: false },
       receiver_id: { type: DataTypes.UUID, allowNull: true },
       message: { type: DataTypes.TEXT, allowNull: false },
-      is_read: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-      },
+      is_read: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     },
     {
       sequelize,

@@ -10,7 +10,7 @@ module.exports = {
         },
         onDelete: 'CASCADE',
         primaryKey: true,
-        allowNull: false,
+        allowNull: false
       },
       skill_id: {
         type: DataTypes.UUID,
@@ -20,7 +20,7 @@ module.exports = {
         },
         onDelete: 'CASCADE',
         primaryKey: true,
-        allowNull: false,
+        allowNull: false
       },
       assigned_at: {
         type: DataTypes.DATE,

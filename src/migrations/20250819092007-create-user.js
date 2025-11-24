@@ -15,11 +15,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 'VOLUNTEER',
       },
-      is_active: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
-      },
+      is_active: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -52,10 +48,8 @@ module.exports = {
     `);
   },
 
-  async down(queryInterface) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('users');
-    await queryInterface.sequelize.query(
-      'DROP TYPE IF EXISTS enum_users_role;'
-    );
+    await queryInterface.sequelize.query('DROP TYPE IF EXISTS enum_users_role;');
   },
 };

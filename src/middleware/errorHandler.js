@@ -1,6 +1,7 @@
 const { UniqueConstraintError, ValidationError } = require('sequelize');
+const ConflictError = require('../errors/errorTypes');
 
-module.exports = (err, _req, res) => {
+module.exports = (err, _req, res, _next) => {
   let status = err.status || err.statusCode || 500;
   // Sequelize errors
   if (err instanceof UniqueConstraintError) {
@@ -11,7 +12,7 @@ module.exports = (err, _req, res) => {
   if (err instanceof ValidationError) {
     // Collect messages from each field
     console.error(`[Error ${status}]`, err.message, err.stack);
-    const messages = err.errors.map((e) => e.message);
+    const messages = err.errors.map(e => e.message);
     return res.status(400).json({ error: messages });
   }
 

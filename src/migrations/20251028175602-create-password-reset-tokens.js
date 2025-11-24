@@ -49,7 +49,7 @@ module.exports = {
     await queryInterface.addIndex('password_reset_tokens', ['user_id']);
   },
 
-  down: async (queryInterface) => {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('password_reset_tokens');
   },
 };

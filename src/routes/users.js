@@ -1,4 +1,6 @@
 const express = require('express');
+const { pool } = require('../db/pool');
+const { User, RefreshToken } = require('../models');
 const { requireAuth, authorizeRoles } = require('../middleware/auth');
 const { getAllUsers } = require('../controllers/userController');
 const roles = require('../constants/roles');

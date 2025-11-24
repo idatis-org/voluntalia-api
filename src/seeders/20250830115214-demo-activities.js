@@ -4,7 +4,7 @@ const { Activity } = require('../models');
 module.exports = {
   async up() {
     // IDs de los COORDINADORES que crearon las actividades
-    const anaId = '11111111-1111-1111-1111-111111111111';
+    const anaId   = '11111111-1111-1111-1111-111111111111';
     const carlosId = '22222222-2222-2222-2222-222222222222';
 
     const activities = [
@@ -28,8 +28,7 @@ module.exports = {
       },
       {
         title: 'Taller de empleo',
-        description:
-          'Capacitación en habilidades digitales para la búsqueda de empleo.',
+        description: 'Capacitación en habilidades digitales para la búsqueda de empleo.',
         date: '2024-09-21',
         created_by: carlosId,
       },
@@ -41,8 +40,7 @@ module.exports = {
       },
       {
         title: 'Proyecto de VoluntALIA',
-        description:
-          'Creación de una aplicación web donde se pueda gestionar a todos los voluntarios de IDATIS',
+        description: 'Creación de una aplicación web donde se pueda gestionar a todos los voluntarios de IDATIS',
         date: '2024-09-28',
         created_by: anaId,
       },
@@ -53,5 +51,5 @@ module.exports = {
 
   async down() {
     await Activity.destroy({ truncate: true, cascade: true });
-  },
+  }
 };
