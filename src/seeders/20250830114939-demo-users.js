@@ -69,5 +69,5 @@ module.exports = {
 
   async down() {
     await User.destroy({ truncate: true, cascade: true });
-  }
+  },
 };

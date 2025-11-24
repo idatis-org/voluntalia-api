@@ -1,6 +1,12 @@
 const express = require('express');
 const { requireAuth, authorizeRoles } = require('../middleware/auth');
-const { create, me, getWorkByUser, deleteWorklog, update } = require('../controllers/worklogController');
+const {
+  create,
+  me,
+  getWorkByUser,
+  deleteWorklog,
+  update,
+} = require('../controllers/worklogController');
 const roles = require('../constants/roles');
 
 const router = express.Router();
@@ -12,7 +18,12 @@ router.post('/create', requireAuth, create);
 router.get('/me', requireAuth, me);
 
 // ! Coordinator-only: view any user's worklogs
-router.get('/user/:id', requireAuth, authorizeRoles(roles.COORDINATOR), getWorkByUser);
+router.get(
+  '/user/:id',
+  requireAuth,
+  authorizeRoles(roles.COORDINATOR),
+  getWorkByUser
+);
 
 // ? Delete own worklog entry
 router.delete('/:id', requireAuth, deleteWorklog);

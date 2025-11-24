@@ -1,6 +1,5 @@
-const documentService = require("../services/documentService");
-const fs = require("fs").promises;
-const path = require("path");
+const documentService = require('../services/documentService');
+const fs = require('fs').promises;
 
 // * Save uploaded file metadata and return the new document record
 exports.saveDocument = async (req, res, next) => {
@@ -8,11 +7,11 @@ exports.saveDocument = async (req, res, next) => {
   try {
     // ! Ensure a valid file was uploaded
     if (!req.file)
-      return res.status(400).json({ error: "No file or invalid type" });
+      return res.status(400).json({ error: 'No file or invalid type' });
 
-    const { type = "OTHER" } = req.body;
+    const { type = 'OTHER' } = req.body;
     const sub = req.user.sub;
-    const { originalname, mimetype, filename, path } = req.file;
+    const { originalname, mimetype, path } = req.file;
     filePath = path;
 
     // * Persist document info in DB
@@ -30,7 +29,7 @@ exports.saveDocument = async (req, res, next) => {
       try {
         await fs.unlink(filePath);
       } catch (unlinkErr) {
-        console.error("Error deleting file after failure:", unlinkErr);
+        console.error('Error deleting file after failure:', unlinkErr);
       }
     }
     next(err);
@@ -45,7 +44,7 @@ exports.downloadDocument = async (req, res, next) => {
 
     // ? If document or file not found, return 404
     if (doc) res.download(doc.storage_path, doc.filename);
-    else res.status(404).json({ error: "File not found" });
+    else res.status(404).json({ error: 'File not found' });
   } catch (err) {
     next(err);
   }

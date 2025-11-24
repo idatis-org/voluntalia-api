@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 /**
- * Settings required to connect to Sequelizer. 
+ * Settings required to connect to Sequelizer.
  * At present, all settings point to the same configuration.
  */
 module.exports = {

@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
   class Document extends Model {
     static associate(models) {
       // Un documento pertenece a un usuario
-      this.belongsTo(models.User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+      this.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+      });
     }
   }
 

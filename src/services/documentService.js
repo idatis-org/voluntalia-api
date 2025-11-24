@@ -1,10 +1,13 @@
-const { NotFoundError } = require("../errors/errorTypes");
-const path = require("path");
-const fs = require("fs");
-const { Document } = require("../models");
+const { Document } = require('../models');
 
 // * Persist document metadata in the database
-exports.saveDocument = async (user_id, filename, mimetype, storage_path, type) => {
+exports.saveDocument = async (
+  user_id,
+  filename,
+  mimetype,
+  storage_path,
+  type
+) => {
   return await Document.create({
     user_id,
     filename,

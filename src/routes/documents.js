@@ -1,7 +1,10 @@
 const express = require('express');
 const { requireAuth } = require('../middleware/auth');
 const upload = require('../middleware/uploads');
-const { saveDocument, downloadDocument } = require('../controllers/documentController');
+const {
+  saveDocument,
+  downloadDocument,
+} = require('../controllers/documentController');
 
 const router = express.Router();
 

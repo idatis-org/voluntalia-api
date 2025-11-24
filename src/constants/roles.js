@@ -1,5 +1,5 @@
 module.exports = Object.freeze({
-    COORDINATOR: 'COORDINATOR',
-    VOLUNTEER:   'VOLUNTEER',
-    LEGAL:       'LEGAL',
+  COORDINATOR: 'COORDINATOR',
+  VOLUNTEER: 'VOLUNTEER',
+  LEGAL: 'LEGAL',
 });
