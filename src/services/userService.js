@@ -4,7 +4,17 @@ const { User, Activity, WorkLog } = require('../models');
 exports.getAllUsers = async () => {
   const users = await User.findAll({
     // ? Only expose safe, necessary fields
-    attributes: ['id', 'name', 'email', 'role', 'is_active', 'created_at'],
+    attributes: [
+      'id',
+      'name',
+      'email',
+      'role',
+      'is_active',
+      'created_at',
+      'phone',
+      'country',
+      'city',
+    ],
     // ! Order by newest first to keep recent sign-ups on top
     order: [['created_at', 'DESC']],
     limit: 100,
@@ -43,4 +53,27 @@ exports.getAllUsers = async () => {
       totalWorkHours,
     };
   });
+};
+
+// * Update user by ID
+exports.updateUser = async (id, updateData) => {
+  const user = await User.findByPk(id);
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  // Update allowed fields
+  const allowedFields = ['name', 'phone', 'country', 'city'];
+  const dataToUpdate = {};
+
+  allowedFields.forEach(field => {
+    if (updateData[field] !== undefined) {
+      dataToUpdate[field] = updateData[field];
+    }
+  });
+
+  await user.update(dataToUpdate);
+
+  return user;
 };

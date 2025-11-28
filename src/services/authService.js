@@ -28,6 +28,7 @@ exports.register = async ({
   country,
   city,
   skills,
+  phone,
 }) => {
   // ! Check for duplicate email
   const existing = await User.findOne({ where: { email } });
@@ -43,6 +44,7 @@ exports.register = async ({
     role,
     country,
     city,
+    phone,
   });
 
   if (skills && skills.length) {
