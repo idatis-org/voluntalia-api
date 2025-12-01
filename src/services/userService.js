@@ -77,3 +77,17 @@ exports.updateUser = async (id, updateData) => {
 
   return user;
 };
+
+// * Toggle user active status
+exports.toggleUserStatus = async (id) => {
+  const user = await User.findByPk(id);
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  // Toggle is_active status (deactivate if active, activate if inactive)
+  await user.update({ is_active: !user.is_active });
+
+  return user;
+};
