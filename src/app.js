@@ -13,6 +13,7 @@ const documentRoutes = require('./routes/documents');
 const activityRoutes = require('./routes/activity');
 const workLogRoutes = require('./routes/worklog');
 const skillRoutes = require('./routes/skill');
+const dashboardRoutes = require('./routes/dashboard');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/document', documentRoutes);
 app.use('/activity', activityRoutes);
 app.use('/worklog', workLogRoutes);
 app.use('/skill', skillRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 app.use(errorHandler); // * Middleware to manage errors 
 
