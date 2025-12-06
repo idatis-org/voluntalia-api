@@ -14,6 +14,7 @@ exports.register = async (req, res, next) => {
       country,
       city,
       skills,
+      phone,
     } = req.body;
 
     // ! Validate required fields
@@ -37,6 +38,7 @@ exports.register = async (req, res, next) => {
       country,
       city,
       skills,
+      phone,
     });
 
     // * Send welcome email with password reset link (secure, non-blocking)
