@@ -16,7 +16,10 @@ const skillRoutes = require('./routes/skill');
 
 const app = express();
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+  origin: 'http://iescrichs.com'
+}));
+
 app.use(express.json());
 app.use(morgan('dev')); // * Useful for viewing HTTP requests via console
 
