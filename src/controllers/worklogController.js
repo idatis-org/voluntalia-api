@@ -1,4 +1,6 @@
 const worklogService = require('../services/worklogService');
+const { WorkLog, Activity, Project } = require('../models');
+const roles = require('../constants/roles');
 
 // * Create a new worklog entry for the authenticated user
 exports.create = async (req, res, next) => {
@@ -63,6 +65,58 @@ exports.deleteWorklog = async (req, res, next) => {
         const { id } = req.params;
         await worklogService.deleteWorklog(id);
         res.status(201).json({ ok: true });
+    } catch (err) {
+        next(err);
+    }
+};
+
+// Approve a worklog: only project manager of the associated project, or COORDINATOR
+exports.approve = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = req.user;
+
+        const worklog = await WorkLog.findByPk(id, {
+            include: [{ model: Activity, as: 'activity', include: [{ model: Project, as: 'project' }] }]
+        });
+        if (!worklog) return res.status(404).json({ error: 'WorkLog not found' });
+
+        const activity = worklog.activity;
+        const project = activity ? activity.project : null;
+
+        const isCoordinator = user.role === roles.COORDINATOR;
+        const isProjectManager = project && project.manager_id === user.sub;
+
+        if (!isCoordinator && !isProjectManager) return res.status(403).json({ error: 'forbidden' });
+
+        const updated = await worklogService.approveWorklog(id, user.sub);
+        res.status(200).json({ worklog: updated });
+    } catch (err) {
+        next(err);
+    }
+};
+
+// Unapprove a worklog: project manager or coordinator
+exports.unapprove = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = req.user;
+
+        const worklog = await WorkLog.findByPk(id, {
+            include: [{ model: Activity, as: 'activity', include: [{ model: Project, as: 'project' }] }]
+        });
+        if (!worklog) return res.status(404).json({ error: 'WorkLog not found' });
+
+        const activity = worklog.activity;
+        const project = activity ? activity.project : null;
+
+        const isCoordinator = user.role === roles.COORDINATOR;
+        const isProjectManager = project && project.manager_id === user.sub;
+
+        if (!isCoordinator && !isProjectManager) return res.status(403).json({ error: 'forbidden' });
+
+        const updated = await worklogService.unapproveWorklog(id);
+        res.status(200).json({ worklog: updated });
     } catch (err) {
         next(err);
     }

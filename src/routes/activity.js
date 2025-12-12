@@ -13,8 +13,8 @@ const roles = require('../constants/roles');
 
 const router = express.Router();
 
-// ! Coordinator-only: create a new activity
-router.post('/create', requireAuth, authorizeRoles(roles.COORDINATOR), create);
+// Create a new activity (coordinator or project manager for their project)
+router.post('/create', requireAuth, create);
 
 // * Fetch all activities (any authenticated user)
 router.get('/', requireAuth, getAllActivities);
@@ -30,21 +30,11 @@ router.delete(
   deleteActivity
 );
 
-// ! Coordinator-only: assign a volunteer to an activity
-router.post(
-  '/:id/assign',
-  requireAuth,
-  authorizeRoles(roles.COORDINATOR),
-  assignActivity
-);
+// Assign a volunteer to an activity (coordinator or project manager for the activity's project)
+router.post('/:id/assign', requireAuth, assignActivity);
 
-// ! Coordinator-only: remove a volunteer from an activity
-router.post(
-  '/:id/unassign',
-  requireAuth,
-  authorizeRoles(roles.COORDINATOR),
-  unassignActivity
-);
+// Remove a volunteer from an activity (coordinator or project manager for the activity's project)
+router.post('/:id/unassign', requireAuth, unassignActivity);
 
 // * List all volunteers for a specific activity
 router.get('/:id/volunteers', requireAuth, getVolunteersByActivity);

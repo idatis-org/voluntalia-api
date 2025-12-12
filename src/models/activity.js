@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'volunteer_id',
         timestamps: false,
       });
+
+        // Relación N-1 con Project (opcional)
+        this.belongsTo(models.Project, { as: 'project', foreignKey: 'project_id', onDelete: 'SET NULL' });
     }
   }
 
@@ -25,14 +28,20 @@ module.exports = (sequelize, DataTypes) => {
       description: { type: DataTypes.TEXT },
       date: { type: DataTypes.DATEONLY, allowNull: false },
       created_by: { type: DataTypes.UUID, allowNull: false },
-      created_at: { type: DataTypes.DATE, allowNull: true },
+      project_id: { type: DataTypes.UUID, allowNull: false },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'planned',
+        validate: { isIn: [['planned', 'active', 'completed', 'cancelled']] }
+      }
     },
     {
       sequelize,
       modelName: 'Activity',
       tableName: 'activities',
       underscored: true,
-      timestamps: false,
+      timestamps: true,
     }
   );
 

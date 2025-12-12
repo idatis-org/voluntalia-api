@@ -3,9 +3,11 @@ const { NotFoundError } = require('../errors/errorTypes');
 const { Activity, User } = require('../models');
 const sequelize = require('sequelize');
 
-// * Create a new activity (coordinator only)
-exports.create = async (title, description, date, sub) => {
-  return await Activity.create({ title, description, date, created_by: sub });
+// * Create a new activity (coordinator or project manager when within project)
+exports.create = async (title, description, date, sub, project_id = null) => {
+  const payload = { title, description, date, created_by: sub };
+  if (project_id) payload.project_id = project_id;
+  return await Activity.create(payload);
 };
 
 // * Fetch all activities with creator name

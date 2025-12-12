@@ -8,6 +8,10 @@ const router = express.Router();
 // * Log new work entry (own record)
 router.post('/create', requireAuth, create);
 
+// Approve/unapprove worklogs
+router.post('/:id/approve', requireAuth, require('../controllers/worklogController').approve);
+router.post('/:id/unapprove', requireAuth, require('../controllers/worklogController').unapprove);
+
 // * Fetch current user's own worklogs
 router.get('/me', requireAuth, me);
 

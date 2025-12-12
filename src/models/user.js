@@ -35,6 +35,16 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'skill_id',
         timestamps: false,
       });
+      
+      // Projects associations
+      User.hasMany(models.Project, { as: 'managedProjects', foreignKey: 'manager_id' });
+      User.belongsToMany(models.Project, {
+        as: 'projects',
+        through: 'project_volunteers',
+        foreignKey: 'user_id',
+        otherKey: 'project_id',
+        timestamps: false,
+      });
     }
   }
   User.init(
@@ -48,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       email: { type: DataTypes.TEXT, allowNull: false, unique: true },
       password_hash: { type: DataTypes.TEXT, allowNull: false },
       role: {
-        type: DataTypes.ENUM('COORDINATOR', 'VOLUNTEER', 'LEGAL'),
+        type: DataTypes.ENUM('COORDINATOR', 'PROJECT_MANAGER', 'VOLUNTEER', 'LEGAL'),
         allowNull: false,
         defaultValue: 'VOLUNTEER',
       },

@@ -1,4 +1,5 @@
-const { WorkLog, Activity } = require('../models/');
+const models = require('../models/');
+const { WorkLog, Activity, Project } = models;
 
 // * Create a new worklog entry linked to a user (and optional activity)
 exports.create = async (user_id, activity_id, week_start, hours, notes) => {
@@ -39,4 +40,25 @@ exports.getWorkById = async (user_id) => {
 // ! Permanently delete a worklog entry by ID
 exports.deleteWorklog = async (id) => {
     await WorkLog.destroy({ where: { id } });
+};
+
+// Approve a worklog: set status -> 'approved', fill approved_by and approved_at
+exports.approveWorklog = async (id, approverId) => {
+    const worklog = await WorkLog.findByPk(id, {
+        include: [{ model: Activity, as: 'activity', include: [{ model: Project, as: 'project' }] }]
+    });
+    if (!worklog) throw new Error('WorkLog not found');
+
+    // set approved fields
+    await worklog.update({ status: 'approved', approved_by: approverId, approved_at: new Date() });
+    return worklog;
+};
+
+// Unapprove a worklog: reset status -> 'pending' and clear approver fields
+exports.unapproveWorklog = async (id) => {
+    const worklog = await WorkLog.findByPk(id);
+    if (!worklog) throw new Error('WorkLog not found');
+
+    await worklog.update({ status: 'pending', approved_by: null, approved_at: null });
+    return worklog;
 };
