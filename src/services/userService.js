@@ -1,4 +1,4 @@
-const { User, Activity, WorkLog } = require('../models');
+const { User, Activity, WorkLog, RefreshToken } = require('../models');
 
 // * Retrieve up to 100 newest users with their activity relations
 exports.getAllUsers = async () => {
@@ -56,22 +56,44 @@ exports.getAllUsers = async () => {
 };
 
 // * Update user by ID
-exports.updateUser = async (id, updateData) => {
+exports.updateUser = async (id, updateData, actor = {}) => {
   const user = await User.findByPk(id);
 
   if (!user) {
     throw new Error('User not found');
   }
 
-  // Update allowed fields
+  // Update allowed fields by default
   const allowedFields = ['name', 'phone', 'country', 'city'];
   const dataToUpdate = {};
-
-  allowedFields.forEach(field => {
+  allowedFields.forEach((field) => {
     if (updateData[field] !== undefined) {
       dataToUpdate[field] = updateData[field];
     }
   });
+
+  // Role change: only COORDINATOR may change role
+  if (updateData.role !== undefined && updateData.role !== user.role) {
+    if (actor.role !== 'COORDINATOR') {
+      throw new Error('Forbidden: only coordinators may change roles');
+    }
+
+    // Validate requested role
+    const allowedRoles = ['COORDINATOR', 'PROJECT_MANAGER', 'VOLUNTEER', 'LEGAL'];
+    if (!allowedRoles.includes(updateData.role)) {
+      throw new Error('Invalid role');
+    }
+
+    dataToUpdate.role = updateData.role;
+
+    // When promoting to PROJECT_MANAGER, require activation step: deactivate user until they set password
+    if (updateData.role === 'PROJECT_MANAGER') {
+      dataToUpdate.is_active = false;
+
+      // Revoke existing refresh tokens for safety
+      await RefreshToken.destroy({ where: { user_id: user.id } });
+    }
+  }
 
   await user.update(dataToUpdate);
 
