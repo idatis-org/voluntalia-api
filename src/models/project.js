@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
 
       // Activities
       this.hasMany(models.Activity, { as: 'activities', foreignKey: 'project_id' });
+      // Creator (User)
+      this.belongsTo(models.User, { as: 'creator', foreignKey: 'created_by', onDelete: 'RESTRICT' });
     }
   }
 
@@ -42,9 +44,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // Associations to user: creator
-  Project.associate = function(models) {
-    Project.belongsTo(models.User, { as: 'creator', foreignKey: 'created_by', onDelete: 'RESTRICT' });
-  };
+  // (associations are defined on the class via static associate)
 
   return Project;
 };

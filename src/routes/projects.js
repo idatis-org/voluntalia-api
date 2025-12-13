@@ -5,8 +5,8 @@ const controller = require('../controllers/projectController');
 
 const router = express.Router();
 
-// Create project (coordinator only)
-router.post('/create', requireAuth, authorizeRoles(roles.COORDINATOR), controller.create);
+// Create project (coordinator or project manager)
+router.post('/create', requireAuth, authorizeRoles(roles.COORDINATOR, roles.PROJECT_MANAGER), controller.create);
 
 // List projects (any authenticated user)
 router.get('/', requireAuth, controller.getAll);

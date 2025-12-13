@@ -6,7 +6,15 @@ exports.create = async (req, res, next) => {
     const { name, description, manager_id, start_date, end_date } = req.body;
     if (!name || !manager_id) return res.status(400).json({ error: 'name and manager_id required' });
 
-    const created_by = req.user.sub;
+    // Only coordinators or project managers may create projects
+    const requesterRole = req.user.role;
+    const requesterId = req.user.sub;
+    if (requesterRole === 'VOLUNTEER' || requesterRole === 'LEGAL') return res.status(403).json({ error: 'forbidden' });
+
+    // Project managers can only create projects where they are the manager
+    if (requesterRole === 'PROJECT_MANAGER' && manager_id !== requesterId) return res.status(403).json({ error: 'project managers can only create projects they manage' });
+
+    const created_by = requesterId;
     const project = await projectService.create({ name, description, manager_id, start_date, end_date, created_by });
     res.status(201).json({ project });
   } catch (err) { next(err); }
@@ -39,7 +47,7 @@ exports.update = async (req, res, next) => {
     const isCoordinator = req.user.role === 'COORDINATOR';
     if (!isManager && !isCoordinator) return res.status(403).json({ error: 'forbidden' });
 
-    const updated = await projectService.update(id, data);
+    const updated = await projectService.update(id, data, { id: userSub, role: req.user.role });
     res.status(200).json({ project: updated });
   } catch (err) { next(err); }
 };
@@ -67,7 +75,7 @@ exports.addVolunteer = async (req, res, next) => {
     const isCoordinator = req.user.role === 'COORDINATOR';
     if (!isManager && !isCoordinator) return res.status(403).json({ error: 'forbidden' });
 
-    await projectService.addVolunteer(id, user_id, userSub);
+    await projectService.addVolunteer(id, user_id, userSub, { id: userSub, role: req.user.role });
     res.status(201).json({ ok: true });
   } catch (err) { next(err); }
 };
@@ -82,7 +90,7 @@ exports.removeVolunteer = async (req, res, next) => {
     const isCoordinator = req.user.role === 'COORDINATOR';
     if (!isManager && !isCoordinator) return res.status(403).json({ error: 'forbidden' });
 
-    await projectService.removeVolunteer(id, user_id);
+    await projectService.removeVolunteer(id, user_id, { id: userSub, role: req.user.role });
     res.status(200).json({ ok: true });
   } catch (err) { next(err); }
 };
@@ -93,7 +101,8 @@ exports.assignActivity = async (req, res, next) => {
     const { project_id } = req.body; // may be null to unassign
 
     // Allow coordinators or activity creators to assign
-    const activity = await projectService.assignActivity(id, project_id);
+    const actor = { id: req.user.sub, role: req.user.role };
+    const activity = await projectService.assignActivity(id, project_id, actor);
     res.status(200).json({ activity });
   } catch (err) { next(err); }
 };

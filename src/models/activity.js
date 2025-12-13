@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       description: { type: DataTypes.TEXT },
       date: { type: DataTypes.DATEONLY, allowNull: false },
       created_by: { type: DataTypes.UUID, allowNull: false },
-      project_id: { type: DataTypes.UUID, allowNull: false },
+      project_id: { type: DataTypes.UUID, allowNull: true },
       status: {
         type: DataTypes.STRING,
         allowNull: false,
