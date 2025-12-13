@@ -166,6 +166,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "http://localhost:4000/auth/reset-password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"davidmamao@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/auth/reset-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -335,36 +367,6 @@
 							"path": [
 								"dashboard",
 								"stats"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:4000/dashboard/users",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTY1MjcsImV4cCI6MTc1NjExNzQyN30.Wkdsbr2Kb8JKRaiAx_Mkx9y3XEDI_ck6Hmj1Hc5CNIo",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/dashboard/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"dashboard",
-								"users"
 							]
 						}
 					},
@@ -905,6 +907,508 @@
 							"path": [
 								"achievement",
 								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "http://localhost:4000/projects/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Project Name\",\r\n    \"description\": \"Project Description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/projects/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/projects",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/projects/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/projects/project-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects",
+								"project-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/projects/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated Name\",\r\n    \"description\": \"Updated Description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/projects/project-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects",
+								"project-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/projects/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/projects/project-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects",
+								"project-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/projects/:id/volunteers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"volunteer-uuid\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/projects/project-id/volunteers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects",
+								"project-id",
+								"volunteers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/projects/:id/volunteers/:user_id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/projects/project-id/volunteers/volunteer-uuid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects",
+								"project-id",
+								"volunteers",
+								"volunteer-uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/projects/activities/:id/project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"project_id\": \"project-uuid\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/projects/activities/activity-id/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"projects",
+								"activities",
+								"activity-id",
+								"project"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "http://localhost:4000/skill/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Skill Name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/skill",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/update/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated Skill Name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill/update/skill-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								"update",
+								"skill-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/delete/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/skill/delete/skill-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								"delete",
+								"skill-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/:id/assign",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"user-uuid\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill/skill-id/assign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								"skill-id",
+								"assign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/:id/unassign",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"user-uuid\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill/skill-id/unassign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								"skill-id",
+								"unassign"
 							]
 						}
 					},
