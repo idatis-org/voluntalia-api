@@ -3,9 +3,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const { sequelize } = require('./models');
-require('dotenv').config();
 
-// Routes 
+
+// Routes
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const notificationRoutes = require('./routes/notification');
@@ -14,6 +14,7 @@ const activityRoutes = require('./routes/activity');
 const workLogRoutes = require('./routes/worklog');
 const skillRoutes = require('./routes/skill');
 const projectRoutes = require('./routes/projects');
+const dashboardRoutes = require('./routes/dashboard');
 
 const app = express();
 
@@ -30,8 +31,9 @@ app.use('/activity', activityRoutes);
 app.use('/worklog', workLogRoutes);
 app.use('/skill', skillRoutes);
 app.use('/projects', projectRoutes);
+app.use('/dashboard', dashboardRoutes);
 
-app.use(errorHandler); // * Middleware to manage errors 
+app.use(errorHandler); // * Middleware to manage errors
 
 const port = process.env.PORT || 4000;
 
