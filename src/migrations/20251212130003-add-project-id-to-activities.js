@@ -4,9 +4,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn('activities', 'project_id', {
       type: Sequelize.UUID,
-      allowNull: false,
+      allowNull: true,
       references: { model: 'projects', key: 'id' },
-      onDelete: 'RESTRICT',
+      onDelete: 'SET NULL',
       onUpdate: 'CASCADE'
     });
 
