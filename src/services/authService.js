@@ -3,6 +3,7 @@ const {
   RefreshToken,
   Activity,
   PasswordResetToken,
+  Project,
 } = require('../models');
 const bcrypt = require('bcrypt');
 const { VOLUNTEER } = require('../constants/roles');
@@ -70,12 +71,22 @@ exports.checkCredentials = async (email, password) => {
 
 // * Issue new access & refresh tokens for user
 exports.createToken = async (user) => {
-  const accessToken = signAccessToken({
+  // Include project_id in access token for PROJECT_MANAGER if they manage a project
+  let project_id = null;
+  if (user.role === 'PROJECT_MANAGER') {
+    const managed = await Project.findOne({ where: { manager_id: user.id } });
+    if (managed) project_id = managed.id;
+  }
+
+  const accessTokenPayload = {
     sub: user.id,
     role: user.role,
     email: user.email,
     name: user.name,
-  });
+  };
+  if (project_id) accessTokenPayload.project_id = project_id;
+
+  const accessToken = signAccessToken(accessTokenPayload);
   const refreshToken = signRefreshToken({ sub: user.id });
 
   // ! Persist refresh token in DB
@@ -84,7 +95,7 @@ exports.createToken = async (user) => {
     user_id: user.id,
   });
 
-  return { accessToken, refreshToken };
+  return { accessToken, refreshToken, project_id };
 };
 
 // * Exchange refresh token for new access token
@@ -119,7 +130,7 @@ exports.logout = async (refreshToken) => {
   );
 };
 
-// * Fetch current user profile with volunteer activities
+// * Fetch current user profile with volunteer activities and projects
 exports.getCurrentUser = async (id) => {
   return await User.findOne({
     where: { id },
@@ -129,6 +140,15 @@ exports.getCurrentUser = async (id) => {
         as: 'volunteerActivities',
         attributes: ['id', 'title', 'description', 'date'],
         through: { attributes: [] }, // * Exclude junction table fields
+      },
+      {
+        association: 'projects', // projects where user is volunteer
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
+      },
+      {
+        association: 'managedProjects', // projects user manages
+        attributes: ['id', 'name'],
       },
     ],
   });

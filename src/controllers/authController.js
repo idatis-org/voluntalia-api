@@ -95,8 +95,8 @@ exports.login = async (req, res, next) => {
     // ! Verify credentials
     const user = await authService.checkCredentials(email, password);
 
-    // * Generate new access and refresh tokens
-    const { accessToken, refreshToken } = await authService.createToken(user);
+    // * Generate new access and refresh tokens (may include project_id for PROJECT_MANAGER)
+    const { accessToken, refreshToken, project_id } = await authService.createToken(user);
 
     return res.status(201).json({
       accessToken,
@@ -106,6 +106,7 @@ exports.login = async (req, res, next) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        project_id: project_id || null,
       },
     });
   } catch (err) {
