@@ -6,7 +6,7 @@ const controller = require('../controllers/projectController');
 const router = express.Router();
 
 // Create project (coordinator or project manager)
-router.post('/create', requireAuth, authorizeRoles(roles.COORDINATOR, roles.PROJECT_MANAGER), controller.create);
+router.post('/create', requireAuth, authorizeRoles(roles.COORDINATOR), controller.create);
 
 // List projects (any authenticated user)
 router.get('/', requireAuth, controller.getAll);
@@ -14,6 +14,11 @@ router.get('/', requireAuth, controller.getAll);
 // Get project by id
 router.get('/:id', requireAuth, controller.getById);
 
+// List activities for a specific project
+router.get('/:id/activities', requireAuth, controller.getActivitiesByProject);
+
+// List volunteers for a specific project (paginated)
+router.get('/:id/volunteers', requireAuth, controller.getVolunteersByProject);
 // Update project (coordinator or project manager) - manager check in controller
 router.put('/:id', requireAuth, controller.update);
 

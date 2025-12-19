@@ -1,29 +1,33 @@
 const projectService = require('../services/projectService');
-const { NotFoundError } = require('../errors/errorTypes');
+const activityService = require('../services/activityService');
+const { NotFoundError, ConflictError } = require('../errors/errorTypes');
+const { Project } = require('../models');
 
 exports.create = async (req, res, next) => {
   try {
-    const { name, description, manager_id, start_date, end_date } = req.body;
-    if (!name || !manager_id) return res.status(400).json({ error: 'name and manager_id required' });
+    const { name, description, manager_id, start_date, end_date, status } = req.body;
+    if (!name) return res.status(400).json({ error: 'name required' });
 
-    // Only coordinators or project managers may create projects
+    // Only coordinators may create projects
     const requesterRole = req.user.role;
     const requesterId = req.user.sub;
-    if (requesterRole === 'VOLUNTEER' || requesterRole === 'LEGAL') return res.status(403).json({ error: 'forbidden' });
+    if (requesterRole !== 'COORDINATOR') return res.status(403).json({ error: 'forbidden' });
 
-    // Project managers can only create projects where they are the manager
-    if (requesterRole === 'PROJECT_MANAGER' && manager_id !== requesterId) return res.status(403).json({ error: 'project managers can only create projects they manage' });
+    // Check unique project name
+    const existing = await Project.findOne({ where: { name } });
+    if (existing) throw new ConflictError('project name already exists');
 
     const created_by = requesterId;
-    const project = await projectService.create({ name, description, manager_id, start_date, end_date, created_by });
+    const project = await projectService.create({ name, description, manager_id, start_date, end_date, created_by, status });
     res.status(201).json({ project });
   } catch (err) { next(err); }
 };
 
 exports.getAll = async (req, res, next) => {
   try {
-    const projects = await projectService.getAll();
-    res.status(200).json({ projects });
+    const { page, per_page, q, manager_id, start_date_from, start_date_to, include } = req.query;
+    const result = await projectService.getAll({ page, per_page, q, manager_id, start_date_from, start_date_to, include });
+    res.status(200).json(result);
   } catch (err) { next(err); }
 };
 
@@ -104,5 +108,24 @@ exports.assignActivity = async (req, res, next) => {
     const actor = { id: req.user.sub, role: req.user.role };
     const activity = await projectService.assignActivity(id, project_id, actor);
     res.status(200).json({ activity });
+  } catch (err) { next(err); }
+};
+
+exports.getActivitiesByProject = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const activities = await activityService.getActivitiesByProject(id);
+    res.status(200).json({ activities });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getVolunteersByProject = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { page, per_page, q } = req.query;
+    const result = await projectService.getVolunteers(id, { page, per_page, q });
+    res.status(200).json(result);
   } catch (err) { next(err); }
 };
