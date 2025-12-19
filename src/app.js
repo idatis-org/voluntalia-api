@@ -15,6 +15,8 @@ const workLogRoutes = require('./routes/worklog');
 const skillRoutes = require('./routes/skill');
 const projectRoutes = require('./routes/projects');
 const dashboardRoutes = require('./routes/dashboard');
+// start background jobs (schedules)
+//require('./jobs/promoteActivities');
 
 const app = express();
 
@@ -28,6 +30,8 @@ app.use('/users', userRoutes);
 app.use('/notification', notificationRoutes);
 app.use('/document', documentRoutes);
 app.use('/activity', activityRoutes);
+// Mount plural path for compatibility with frontend expectations
+app.use('/activities', activityRoutes);
 app.use('/worklog', workLogRoutes);
 app.use('/skill', skillRoutes);
 app.use('/projects', projectRoutes);
