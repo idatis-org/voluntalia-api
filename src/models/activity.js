@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false,
       });
 
-        // Relación N-1 con Project (opcional)
-        this.belongsTo(models.Project, { as: 'project', foreignKey: 'project_id', onDelete: 'SET NULL' });
+        // Relación N-1 con Project
+          this.belongsTo(models.Project, { as: 'project', foreignKey: 'project_id', onDelete: 'CASCADE' });
     }
   }
 
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       description: { type: DataTypes.TEXT },
       date: { type: DataTypes.DATEONLY, allowNull: false },
       created_by: { type: DataTypes.UUID, allowNull: false },
-      project_id: { type: DataTypes.UUID, allowNull: true },
+      project_id: { type: DataTypes.UUID, allowNull: false },
       status: {
         type: DataTypes.STRING,
         allowNull: false,
