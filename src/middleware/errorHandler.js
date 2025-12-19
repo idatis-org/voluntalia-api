@@ -1,12 +1,26 @@
 const { UniqueConstraintError, ValidationError } = require('sequelize');
-const ConflictError = require('../errors/errorTypes');
 
-module.exports = (err, _req, res, _next) => {
+module.exports = (err, req, res, next) => {
   let status = err.status || err.statusCode || 500;
-  // Sequelize errors
+  // Sequelize unique constraint -> give more context
   if (err instanceof UniqueConstraintError) {
-    // Duplicated
-    return res.status(409).json({ error: 'Duplicated entry' });
+    const fields = err.fields || {};
+    let message = 'Duplicated entry';
+    try {
+      const path = req && req.path ? req.path : '';
+      // Project name uniqueness
+      if (fields.name && path.startsWith('/projects')) {
+        message = 'project name already exists';
+      } else if (fields.title && fields.project_id && path.startsWith('/activity')) {
+        message = 'activity with same title already exists in project';
+      } else if (Object.keys(fields).length) {
+        message = `Duplicate value for fields: ${Object.keys(fields).join(', ')}`;
+      }
+    } catch (e) {
+      message = 'Duplicated entry';
+    }
+
+    return res.status(409).json({ error: message });
   }
 
   if (err instanceof ValidationError) {
@@ -19,10 +33,16 @@ module.exports = (err, _req, res, _next) => {
   // Semantic errors
   if (err.status) {
     console.error(`[Error ${status}]`, err.message, err.stack);
+    if (process.env.NODE_ENV !== 'production') {
+      return res.status(err.status).json({ error: err.message, stack: err.stack });
+    }
     return res.status(err.status).json({ error: err.message });
   }
 
   // Fallback
   console.error(`[Error ${status}]`, err.message, err.stack);
+  if (process.env.NODE_ENV !== 'production') {
+    return res.status(500).json({ error: err.message, stack: err.stack });
+  }
   return res.status(500).json({ error: 'Internal error' });
 };
