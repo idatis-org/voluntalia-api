@@ -29,7 +29,7 @@ const baseConfig = {
     ssl: false,
   },
   // Fuerza IPv4
-  host: 'db',
+  host: 'iescrichs.com',
   port: 5432,
   // Retry agresivo
   retry: {
