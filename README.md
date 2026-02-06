@@ -16,7 +16,7 @@ Su propósito es servir como base para aplicaciones que requieran registrar, aut
 ## ⚙️ Requisitos previos
 Antes de iniciar, asegúrate de tener instalado:
 
-1. [Node.js](https://nodejs.org/) (v16+ recomendado)  
+1. [Node.js](https://nodejs.org/) (v20.17.0)  
 2. [Docker Desktop](https://www.docker.com/products/docker-desktop/)  
 3. [Git](https://git-scm.com/)  
 
@@ -37,17 +37,18 @@ Antes de iniciar, asegúrate de tener instalado:
    ```bash
    docker exec -it voluntalia-db psql -U postgres -d voluntalia-test
    ```
+4. UI Base de datos: En mi caso he utilizado [DBeaver](https://dbeaver.io/download/) porque es facil de instalar, la interfaz es muy fácil de entender y para crear las conexiones con la base de datos no tienes ningún problema
 
 
 ## 🛠️ Preparación de la base de datos
 
-1. Asegúrate de que tu base de datos tenga habilitada la extensión `uuid-ossp`:  
+1. Partimos de que estás usando DBeaver, Crea un nuevo script de la base de datos y asegúrate de que tu base de datos tenga habilitada la extensión `uuid-ossp`:  
 
    ```sql
    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
    ```
 
-2. Ejecuta las migraciones de Sequelize:  
+2. Ejecuta las migraciones de Sequelize, desde la raiz del proyecto, sino has hecho un `npm install` es el momento:  
    ```bash
    npx sequelize-cli db:migrate
    ```
@@ -56,6 +57,20 @@ Antes de iniciar, asegúrate de tener instalado:
    ```bash
    npx sequelize-cli db:seed:all
    ```
+
+---
+
+## 🔧 Ajustes adicionales en el sistema
+
+### &nbsp;&nbsp;&nbsp;&nbsp; :email:  Sendgrid
+
+Tenemos un archivo de configuración `Sendgrid_configuration.md` que debemos de configurar en nuestro .env para poder utilizar este servicio, donde a la hora de registrar un usuario a este le llegará un mail para crear la contraseña.
+
+Nosotros ya tenemos configuraciones para esto, las podéis crear vosotros o nos la pedís.
+
+### &nbsp;&nbsp;&nbsp;&nbsp; 📂 Manage files
+
+Tenemos un archivo de configuracion y guia paso a paso `Manage_files_configuration.md` donde se explica como crear el contenedor y la estructura de cada uno de los archivos para despachar archivos en la aplicación
 
 ---
 
