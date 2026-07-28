@@ -2,6 +2,7 @@ const {
   User,
   RefreshToken,
   Activity,
+  Skill,
   PasswordResetToken,
 } = require('../models');
 const bcrypt = require('bcrypt');
@@ -93,7 +94,8 @@ exports.refresh = async (refreshToken) => {
   const token = await RefreshToken.findOne({
     where: { token: refreshToken },
   });
-  if (!token) throw new NotFoundError('Invalid refresh token');
+  if (!token || token.revoked)
+    throw new CredentialError('Invalid or revoked refresh token');
 
   // ? Decode and validate refresh token payload
   const payload = verifyRefreshToken(refreshToken);
@@ -123,12 +125,19 @@ exports.logout = async (refreshToken) => {
 exports.getCurrentUser = async (id) => {
   return await User.findOne({
     where: { id },
+    attributes: { exclude: ['password_hash'] },
     include: [
       {
         model: Activity,
         as: 'volunteerActivities',
         attributes: ['id', 'title', 'description', 'date'],
         through: { attributes: [] }, // * Exclude junction table fields
+      },
+      {
+        model: Skill,
+        as: 'skills',
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
       },
     ],
   });

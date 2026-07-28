@@ -200,6 +200,77 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "http://localhost:4000/users/me/preferences",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/users/me/preferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users",
+								"me",
+								"preferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/users/me/preferences",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"push_notifications\": true,\n    \"language\": \"es\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/users/me/preferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users",
+								"me",
+								"preferences"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -339,36 +410,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "http://localhost:4000/dashboard/users",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYxMTY1MjcsImV4cCI6MTc1NjExNzQyN30.Wkdsbr2Kb8JKRaiAx_Mkx9y3XEDI_ck6Hmj1Hc5CNIo",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/dashboard/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"dashboard",
-								"users"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -376,7 +417,7 @@
 			"name": "Document",
 			"item": [
 				{
-					"name": "http://localhost:4000/document",
+					"name": "http://localhost:4000/document/upload?folder=resources",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -396,25 +437,59 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/david.ortega/OneDrive - Servitir 2000/Escritorio/nene.png"
+									"src": ""
+								},
+								{
+									"key": "type",
+									"type": "text",
+									"value": "pdf"
+								},
+								{
+									"key": "format",
+									"type": "text",
+									"value": "pdf"
+								},
+								{
+									"key": "category_id",
+									"type": "text",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "resource_type_id",
+									"type": "text",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"type": "text",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"type": "text",
+									"value": "",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:4000/document",
+							"raw": "http://localhost:4000/document/upload?folder=resources",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"document"
+								"document",
+								"upload"
 							],
 							"query": [
 								{
-									"key": "file",
-									"value": null,
-									"disabled": true
+									"key": "folder",
+									"value": "resources"
 								}
 							]
 						}
@@ -422,7 +497,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:4000/document/download/115d78c7-157b-4d48-9dab-60c2f27f9b23",
+					"name": "http://localhost:4000/document/115d78c7-157b-4d48-9dab-60c2f27f9b23/download",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -437,7 +512,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/document/download/115d78c7-157b-4d48-9dab-60c2f27f9b23",
+							"raw": "http://localhost:4000/document/115d78c7-157b-4d48-9dab-60c2f27f9b23/download",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -445,22 +520,22 @@
 							"port": "4000",
 							"path": [
 								"document",
-								"download",
-								"115d78c7-157b-4d48-9dab-60c2f27f9b23"
+								"115d78c7-157b-4d48-9dab-60c2f27f9b23",
+								"download"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:4000/document/downloadCertificate",
+					"name": "http://localhost:4000/document",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTI4NzYsImV4cCI6MTc1NjI5Mzc3Nn0.5wQhJ94uOFnGdSBgxV93dY7CgF2NXeLsGCJtDFkko-4",
+									"value": "{{accessToken}}",
 									"type": "string"
 								}
 							]
@@ -468,7 +543,36 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/document/downloadCertificate",
+							"raw": "http://localhost:4000/document",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"document"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/document/categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/document/categories",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -476,7 +580,37 @@
 							"port": "4000",
 							"path": [
 								"document",
-								"downloadCertificate"
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/document/types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/document/types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"document",
+								"types"
 							]
 						}
 					},
@@ -848,63 +982,215 @@
 			]
 		},
 		{
-			"name": "Logros",
+			"name": "Skill",
 			"item": [
 				{
-					"name": "http://localhost:4000/achievement/check",
+					"name": "http://localhost:4000/skill/create",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTA0NjgsImV4cCI6MTc1NjI5MTM2OH0.xiV9vn4_tIH-x-lfhf1YL98Xn-c867q8y7h3aboiUKw",
+									"value": "{{accessToken}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"First Aid\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:4000/achievement/check",
+							"raw": "http://localhost:4000/skill/create",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"achievement",
-								"check"
+								"skill",
+								"create"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:4000/achievement/me",
+					"name": "http://localhost:4000/skill",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzE2NWJiOC00OGIzLTQyMzQtYjQwNy0xNTE2MDY0MTM4YmQiLCJyb2xlIjoiQ09PUkRJTkFUT1IiLCJlbWFpbCI6ImRhdmlkbWFtYW9AbWFpbC5jb20iLCJuYW1lIjoiRGF2aWQgbWFtYW8iLCJpYXQiOjE3NTYyOTE3NzEsImV4cCI6MTc1NjI5MjY3MX0.ckxfuzKyIC6Kw_D-_koz9KFyXbz0l5bvqCSa030ctYg",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/achievement/me",
+							"raw": "http://localhost:4000/skill",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"achievement",
-								"me"
+								"skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/update/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Advanced First Aid\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill/update/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								"update",
+								":id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/delete/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/skill/delete/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								"delete",
+								":id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/:id/assign",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"volunteer_id\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill/:id/assign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								":id",
+								"assign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/skill/:id/unassign",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"volunteer_id\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/skill/:id/unassign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"skill",
+								":id",
+								"unassign"
 							]
 						}
 					},

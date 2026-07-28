@@ -2,9 +2,11 @@
 
 Este documento explica cómo configurar y desplegar un contenedor Docker con Nginx para servir imágenes y otros archivos estáticos desde un directorio del host.
 
+> ⚠️ Este servicio **no vive dentro de este repositorio**. Los archivos (`docker-compose.yml`, `Dockerfile`, `nginx.conf`) están en el repo hermano `../file-server/` (al mismo nivel que `voluntalia-api/` y `voluntalia/`). Antes existía una copia duplicada dentro de `voluntalia-api/file-server/`; se eliminó para tener una única fuente de verdad.
+
 ---
 
-## 📁 Estructura del Proyecto
+## 📁 Estructura del Proyecto (`../file-server/`)
 
 
 ├── docker-compose.yml
@@ -98,7 +100,7 @@ Antes de la primera vez, crea la red compartida (una sola vez):
 docker network create voluntalia_net
 ```
 
-Desde la raíz del proyecto, ejecutar:
+Desde `../file-server/` (el repo hermano), ejecutar:
 ```bash
 docker-compose up --build
 ```

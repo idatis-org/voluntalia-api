@@ -17,18 +17,6 @@ exports.register = async (req, res, next) => {
       phone,
     } = req.body;
 
-    // ! Validate required fields
-    if (!name || !email || !password) {
-      return res
-        .status(400)
-        .json({ error: 'name, email and password are required' });
-    }
-
-    // ? Restrict roles to allowed values
-    const allowed = ['COORDINATOR', 'VOLUNTEER', 'LEGAL'];
-    if (!allowed.includes(role))
-      return res.status(400).json({ error: 'Invalid role' });
-
     // * Create user via service layer
     const user = await authService.register({
       name,

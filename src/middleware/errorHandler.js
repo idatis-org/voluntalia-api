@@ -1,4 +1,5 @@
 const { UniqueConstraintError, ValidationError } = require('sequelize');
+const { MulterError } = require('multer');
 const ConflictError = require('../errors/errorTypes');
 
 module.exports = (err, _req, res, _next) => {
@@ -7,6 +8,12 @@ module.exports = (err, _req, res, _next) => {
   if (err instanceof UniqueConstraintError) {
     // Duplicated
     return res.status(409).json({ error: 'Duplicated entry' });
+  }
+
+  // Multer errors (e.g. file too large)
+  if (err instanceof MulterError) {
+    console.error(`[Error 400]`, err.message);
+    return res.status(400).json({ error: err.message });
   }
 
   if (err instanceof ValidationError) {

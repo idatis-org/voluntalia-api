@@ -28,13 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       receiver_id: { type: DataTypes.UUID, allowNull: true },
       message: { type: DataTypes.TEXT, allowNull: false },
       is_read: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+      created_at: { type: DataTypes.DATE, allowNull: false },
     },
     {
       sequelize,
       modelName: 'Notification',
       tableName: 'notifications',
       underscored: true,
-      timestamps: false, // created_at se define manualmente
+      timestamps: false, // no hay updated_at; created_at se declara arriba a mano
     }
   );
 

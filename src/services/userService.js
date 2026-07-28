@@ -57,7 +57,7 @@ exports.getAllUsers = async () => {
 
 // * Update user by ID
 exports.updateUser = async (id, updateData) => {
-  const user = await User.findByPk(id);
+  const user = await User.findByPk(id, { attributes: { exclude: ['password_hash'] } });
 
   if (!user) {
     throw new Error('User not found');
@@ -80,7 +80,7 @@ exports.updateUser = async (id, updateData) => {
 
 // * Toggle user active status
 exports.toggleUserStatus = async (id) => {
-  const user = await User.findByPk(id);
+  const user = await User.findByPk(id, { attributes: { exclude: ['password_hash'] } });
 
   if (!user) {
     throw new Error('User not found');
