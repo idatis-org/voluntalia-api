@@ -1,7 +1,5 @@
 services:
   nginx:
     build: .
-    ports:
-      - "9200:80"
     volumes:
       - "C:/tmp/files:/usr/share/nginx/html/files"

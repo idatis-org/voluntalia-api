@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - voluntalia_net
+
+networks:
+  voluntalia_net:
+    external: true

@@ -25,21 +25,32 @@ Este documento explica cómo configurar y desplegar un contenedor Docker con Ngi
 Archivo docker-compose.yml:
 ```yaml
 services:
-  nginx:
+  file-server:
     build: .
-    ports:
-      - "9200:80"
     volumes:
       - "C:/tmp/files:/usr/share/nginx/html/files"
+    networks:
+      - voluntalia_net
 
+networks:
+  voluntalia_net:
+    external: true
 ```
 #### 📌 Detalles
 
-1. El puerto 9200 del host se mapea al puerto 80 del contenedor.
+1. El contenedor **ya no publica ningún puerto al host**: solo es alcanzable desde otros contenedores conectados a la red Docker `voluntalia_net` (en la práctica, la API). Así se evita que cualquiera con la URL pueda descargar archivos sin pasar por la autenticación/autorización de la API.
 
 2. La carpeta C:/tmp/files del host se monta dentro del contenedor.
 
 3. Dentro de C:/tmp/files puede existir la carpeta images.
+
+4. La red `voluntalia_net` debe existir antes de levantar los servicios (se comparte con la API):
+   ```bash
+   docker network create voluntalia_net
+   ```
+   Luego, desde `voluntalia-api/` (que ahora también tiene su propio `docker-compose.yml`), levanta la API con `docker-compose up --build`, y desde aquí el file-server con el mismo comando. Ambos deben apuntar a la misma red externa.
+
+5. La API referencia este servicio internamente por su nombre (`FILES_PATH=http://file-server/files` en el `.env` de `voluntalia-api`), no por `localhost:9200`.
 
 ## 📦 Dockerfile
 
@@ -66,7 +77,7 @@ server {
 
     location /files/ {
         alias /usr/share/nginx/html/files/;
-        autoindex on;
+        autoindex off;
     }
 }
 
@@ -74,13 +85,18 @@ server {
 
 #### 📌 Explicación
 
-* /files/ es la ruta pública para acceder a los archivos.
+* /files/ es la ruta interna (no pública) para acceder a los archivos, solo alcanzable desde la red Docker compartida.
 
 * alias apunta al volumen montado desde el host.
 
-* autoindex on permite listar los archivos desde el navegador.
+* autoindex off evita que se pueda listar el contenido de una carpeta navegando directamente a su URL — solo se puede acceder a un archivo si se conoce su ruta exacta, y el único componente que la conoce y la sirve al cliente final es la API (tras validar autenticación).
 
 ## 🚀 Despliegue en Docker
+
+Antes de la primera vez, crea la red compartida (una sola vez):
+```bash
+docker network create voluntalia_net
+```
 
 Desde la raíz del proyecto, ejecutar:
 ```bash
@@ -91,17 +107,16 @@ Esto:
 
 * Construye la imagen de Nginx
 
-* Levanta el contenedor
+* Levanta el contenedor conectado a `voluntalia_net`
 
-* Expone el servicio en el puerto configurado
+* **No** publica ningún puerto al host — el servicio solo es accesible desde otros contenedores de esa red (la API)
 
 ## 🧪 Acceso a las Imágenes
 
-Si existe la siguiente ruta en el host:
+El acceso directo por navegador (p. ej. `http://localhost:9200/files/...`) **ya no está disponible** — es intencional, forma parte de la corrección de seguridad que cierra el acceso sin autenticación a los documentos.
 
-`C:/tmp/files/images/example.jpg`
+Para descargar un archivo hay que pasar por la API, que sí exige autenticación:
 
+`GET http://localhost:<PORT>/document/:id/download` (con `Authorization: Bearer <token>`)
 
-La imagen estará disponible en:
-
-`http://localhost:9200/files/images/example.jpg`
+La API resuelve internamente la URL real (`http://file-server/files/...`) y hace de proxy hacia el contenedor Nginx a través de la red interna `voluntalia_net`.
