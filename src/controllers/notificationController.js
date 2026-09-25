@@ -20,7 +20,7 @@ exports.send = async(req, res, next) => {
 exports.get = async(req, res, next) => {
     try {
         const data = await notificationService.get(req.user.sub);
-        res.status(201).json({data});
+        res.status(200).json({data});
     } catch (err) {
         next(err)
     }

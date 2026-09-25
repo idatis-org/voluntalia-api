@@ -23,11 +23,11 @@ exports.deleteSkill = async (id) => {
   await Skill.destroy({ where: { id } });
 };
 
-// ! Assign a single volunteer to a skill (replaces any existing)
+// ! Add a volunteer to a skill (keeps any already assigned)
 exports.assignSkill = async (id, volunteer_id) => {
   const skill = await Skill.findByPk(id);
   if (!skill) throw new Error("Skill not found");
-  await skill.setVolunteers([volunteer_id]);
+  await skill.addVolunteer(volunteer_id);
 };
 
 // ! Remove a specific volunteer from a skill

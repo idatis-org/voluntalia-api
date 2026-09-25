@@ -1,13 +1,17 @@
 const multer = require('multer');
 const path   = require('path');
 const fs = require('fs');
+require('dotenv').config();
 
 
 // Configuring Multer for local file storage
 // -- Export ready-to-use middleware for Express routes
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = 'C:/tmp/files'//path.join(__dirname, '../../uploads');
+    const uploadPath = process.env.PIVOT;
+    if (!uploadPath) {
+      return cb(new Error('PIVOT not defined in .env'));
+    }
     const sub = req.customFolder || 'misc';
     const fullPath = path.join(uploadPath, sub);
     if (!fs.existsSync(fullPath)) fs.mkdirSync(fullPath, {recursive: true}); // * Automatically create the `uploads` folder if it does not exist

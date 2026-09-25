@@ -15,8 +15,17 @@ module.exports = (sequelize, DataTypes) => {
       user_id:     { type: DataTypes.UUID, allowNull: false },
       activity_id: { type: DataTypes.UUID, allowNull: true },
       week_start:  { type: DataTypes.DATEONLY, allowNull: false },
-      hours:       { type: DataTypes.STRING, allowNull: false },
+      hours:       {
+        type: DataTypes.DECIMAL(6, 2),
+        allowNull: false,
+        // * pg returns DECIMAL as a string by default; always expose a real number.
+        get() {
+          const raw = this.getDataValue('hours');
+          return raw === null || raw === undefined ? raw : parseFloat(raw);
+        },
+      },
       notes:       { type: DataTypes.TEXT },
+      status:      { type: DataTypes.ENUM('pending', 'approved', 'rejected'), allowNull: false, defaultValue: 'pending' },
       created_at:  { type: DataTypes.DATE, allowNull: true },
       updated_at:  { type: DataTypes.DATE, allowNull: true },
     },

@@ -4,6 +4,12 @@ Este documento explica cómo configurar y desplegar un contenedor Docker con Ngi
 
 > ⚠️ Este servicio **no vive dentro de este repositorio**. Los archivos (`docker-compose.yml`, `Dockerfile`, `nginx.conf`) están en el repo hermano `../file-server/` (al mismo nivel que `voluntalia-api/` y `voluntalia/`). Antes existía una copia duplicada dentro de `voluntalia-api/file-server/`; se eliminó para tener una única fuente de verdad.
 
+> 💡 Todo lo de este documento (crear la red `voluntalia_net` a mano, levantar `file-server/` suelto) es para cuando quieres correr **solo esta pieza** junto a otras corriendo en local (p. ej. la API con `npm run dev`). Si quieres levantar todo el stack de una vez (Postgres + API + frontend + file-server), usa el `docker-compose.yml` de la raíz del workspace — ese ya resuelve la red internamente, sin pasos manuales:
+> ```bash
+> cd ../..   # a la raíz del workspace, desde voluntalia-api/
+> docker-compose up --build
+> ```
+
 ---
 
 ## 📁 Estructura del Proyecto (`../file-server/`)

@@ -74,8 +74,11 @@ exports.downloadDocument = async (req, res, next) => {
                       .request(options, (remoteRes) => {
 
       if (remoteRes.statusCode !== 200) {
-        return res.sendStatus(remoteRes.statusCode);
+        return res.status(502).json({ error: 'The file could not be retrieved from storage.' });
       }
+
+      // * Only count the download once we know the file will actually be served
+      documentService.incrementDownloads(id).catch((err) => console.error('Failed to increment downloads:', err));
 
       res.set('Content-Type', remoteRes.headers['content-type'] || doc.mimetype);
 

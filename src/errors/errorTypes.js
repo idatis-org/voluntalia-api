@@ -1,9 +1,10 @@
 /**
  * Extends class to manage errors in the different services
- * 
+ *
  * * ConflictError      - Return error message and status 409
  * * CredentialError    - Return error message and status 401
  * * NotFoundError      - Return error message and status 404
+ * * ForbiddenError      - Return error message and status 403
  */
 class ConflictError extends Error {
     constructor(message = 'Conflict') {
@@ -25,4 +26,11 @@ class NotFoundError extends Error {
         this.status = 404
     }
 }
-module.exports = { ConflictError, CredentialError, NotFoundError };
+
+class ForbiddenError extends Error {
+    constructor(message = 'Forbidden'){
+        super(message);
+        this.status = 403
+    }
+}
+module.exports = { ConflictError, CredentialError, NotFoundError, ForbiddenError };

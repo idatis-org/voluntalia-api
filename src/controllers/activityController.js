@@ -26,7 +26,7 @@ exports.create = async (req, res, next) => {
 exports.getAllActivities = async (req, res, next) => {
   try {
     const activities = await activityService.getAll();
-    res.status(201).json({ activities });
+    res.status(200).json({ activities });
   } catch (err) {
     next(err);
   }
@@ -39,7 +39,7 @@ exports.update = async (req, res, next) => {
     const { title, description, date } = req.body;
 
     await activityService.update(title, description, date, id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -51,7 +51,7 @@ exports.deleteActivity = async (req, res, next) => {
     const { id } = req.params;
 
     await activityService.deleteActivity(id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -68,7 +68,7 @@ exports.assignActivity = async (req, res, next) => {
       return res.status(400).json({ error: "volunteer_id required" });
 
     await activityService.assignActivity(id, volunteer_id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -85,7 +85,7 @@ exports.unassignActivity = async (req, res, next) => {
       return res.status(400).json({ error: "volunteer_id required" });
 
     await activityService.unassignActivity(id, volunteer_id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -96,7 +96,7 @@ exports.getVolunteersByActivity = async (req, res, next) => {
   try {
     const { id } = req.params; // activity id
     const users = await activityService.getVolunteersByActivity(id);
-    res.status(201).json({ users });
+    res.status(200).json({ users });
   } catch (err) {
     next(err);
   }

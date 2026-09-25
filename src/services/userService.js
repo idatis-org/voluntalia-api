@@ -41,13 +41,7 @@ exports.getAllUsers = async () => {
 
   // Add totalWorkHours field for each user
   return users.map((user) => {
-    const totalWorkHours = user.workLogs.reduce((sum, wl) => {
-      const h =
-        wl.hours && typeof wl.hours.hours === 'number' ? wl.hours.hours : 0;
-      const m =
-        wl.hours && typeof wl.hours.minutes === 'number' ? wl.hours.minutes : 0;
-      return sum + h + m / 60;
-    }, 0);
+    const totalWorkHours = user.workLogs.reduce((sum, wl) => sum + (wl.hours || 0), 0);
     return {
       ...user.toJSON(),
       totalWorkHours,

@@ -1,7 +1,8 @@
 const express = require('express');
-const { requireAuth } = require('../middleware/auth');
+const { requireAuth, authorizeRoles } = require('../middleware/auth');
 const upload = require('../middleware/uploads');
 const { saveDocument, downloadDocument, getCategories, getTypes, getAllDocuments, deleteDocument } = require('../controllers/documentController');
+const roles = require('../constants/roles');
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/:id/download', requireAuth, downloadDocument);
 router.get('/categories', requireAuth, getCategories);
 router.get('/types', requireAuth, getTypes);  
 
-// ! Delete document endpoint
-router.delete('/:id', requireAuth, deleteDocument);
+// ! Coordinator-only: delete document endpoint
+router.delete('/:id', requireAuth, authorizeRoles(roles.COORDINATOR), deleteDocument);
 
 module.exports = router;

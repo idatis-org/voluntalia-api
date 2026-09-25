@@ -8,8 +8,8 @@ exports.registerSchema = z.object({
   email: z.string().trim().toLowerCase().email('must be a valid email'),
   password: z.string().min(6, 'password must be at least 6 characters'),
   role: z.enum(ALLOWED_REGISTER_ROLES).optional(),
-  country: z.string().optional(),
-  city: z.string().optional(),
+  country: z.string().trim().min(1, 'country is required'),
+  city: z.string().trim().min(1, 'city is required'),
   phone: z.string().optional(),
   skills: z.array(z.string()).optional(),
 });

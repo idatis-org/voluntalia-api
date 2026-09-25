@@ -4,6 +4,7 @@ const {
   Activity,
   Skill,
   PasswordResetToken,
+  sequelize,
 } = require('../models');
 const bcrypt = require('bcrypt');
 const { VOLUNTEER } = require('../constants/roles');
@@ -33,24 +34,24 @@ exports.register = async ({
 }) => {
   // ! Check for duplicate email
   const existing = await User.findOne({ where: { email } });
-  console.log(existing);
   if (existing) throw new ConflictError('Email already registered');
 
   // * Hash password before storage
   const password_hash = await bcrypt.hash(password, SALT_ROUNDS);
-  const user = await User.create({
-    name,
-    email,
-    password_hash,
-    role,
-    country,
-    city,
-    phone,
-  });
 
-  if (skills && skills.length) {
-    await user.addSkills(skills);
-  }
+  // * User creation and initial skill assignment must succeed or fail together
+  const user = await sequelize.transaction(async (t) => {
+    const createdUser = await User.create(
+      { name, email, password_hash, role, country, city, phone },
+      { transaction: t }
+    );
+
+    if (skills && skills.length) {
+      await createdUser.addSkills(skills, { transaction: t });
+    }
+
+    return createdUser;
+  });
 
   // ? Return only safe fields
   const { id, created_at } = user;
@@ -174,8 +175,6 @@ exports.createPasswordResetToken = async (userId, token) => {
 
 // Reset password using token
 exports.resetPasswordWithToken = async (token, newPassword) => {
-  const bcrypt = require('bcrypt');
-  const { User, PasswordResetToken } = require('../models');
   const { Op } = require('sequelize');
 
   // Input validation
@@ -211,25 +210,29 @@ exports.resetPasswordWithToken = async (token, newPassword) => {
     // Hash the new password
     const hashedPassword = await bcrypt.hash(newPassword, SALT_ROUNDS);
 
-    // Update user password
-    await User.update(
-      { password_hash: hashedPassword },
-      { where: { id: resetToken.user_id } }
-    );
+    // * These three writes must succeed or fail together: a crash between
+    // them could otherwise leave the password unchanged but the token
+    // already marked used (locking the user out of resetting again).
+    await sequelize.transaction(async (t) => {
+      await User.update(
+        { password_hash: hashedPassword },
+        { where: { id: resetToken.user_id }, transaction: t }
+      );
 
-    // Mark token as used
-    await resetToken.update({ used: true });
+      await resetToken.update({ used: true }, { transaction: t });
 
-    // Optionally, invalidate all other reset tokens for this user
-    await PasswordResetToken.update(
-      { used: true },
-      {
-        where: {
-          user_id: resetToken.user_id,
-          id: { [Op.ne]: resetToken.id }, // Don't update the current token again
-        },
-      }
-    );
+      // Invalidate all other reset tokens for this user
+      await PasswordResetToken.update(
+        { used: true },
+        {
+          where: {
+            user_id: resetToken.user_id,
+            id: { [Op.ne]: resetToken.id }, // Don't update the current token again
+          },
+          transaction: t,
+        }
+      );
+    });
 
     return true;
   } catch (dbError) {

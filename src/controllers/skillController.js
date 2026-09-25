@@ -15,7 +15,7 @@ exports.create = async (req, res, next) => {
 exports.getAllSkills = async (req, res, next) => {
     try {
         const skills = await skillService.getAll();
-        res.status(201).json({skills});
+        res.status(200).json({skills});
     } catch (err) {
         next(err);
     }
@@ -28,7 +28,7 @@ exports.update = async (req, res, next) => {
     const { name } = req.body;
 
     await skillService.update(name, id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -40,7 +40,7 @@ exports.deleteSkill = async (req, res, next) => {
     const { id } = req.params;
 
     await skillService.deleteSkill(id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -57,7 +57,7 @@ exports.assignSkill = async (req, res, next) => {
       return res.status(400).json({ error: "volunteer_id required" });
 
     await skillService.assignSkill(id, volunteer_id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
@@ -74,7 +74,7 @@ exports.unassignSkill = async (req, res, next) => {
       return res.status(400).json({ error: "volunteer_id required" });
 
     await skillService.unassignSkill(id, volunteer_id);
-    res.status(201).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }

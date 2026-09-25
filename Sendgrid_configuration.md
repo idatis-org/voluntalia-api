@@ -24,7 +24,7 @@ The Voluntalia API uses SendGrid to send:
 # SendGrid Configuration
 SENDGRID_API_KEY=SG.your_api_key_here
 SENDGRID_FROM_EMAIL=noreply@voluntalia.org
-FRONTEND_URL=http://localhost:3000
+FRONTEND_URL=http://localhost:8080
 ```
 
 ## Setting Up SendGrid
@@ -75,7 +75,7 @@ If not using domain authentication:
 # .env.development
 SENDGRID_API_KEY=SG.development_api_key_here
 SENDGRID_FROM_EMAIL=dev@voluntalia.org
-FRONTEND_URL=http://localhost:3000
+FRONTEND_URL=http://localhost:8080
 ```
 
 ### Staging Environment

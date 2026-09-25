@@ -12,10 +12,13 @@ exports.changePath = (oldPath) => {
     throw new Error("FILES_PATH not defined in .env");
   }
 
-  const pivot = process.env.PIVOT;                           
-  const rest = oldPath.slice(pivot.length -1); 
-
-  return path.join(filesPath, rest);
+  const pivot = process.env.PIVOT;
+  // * Build a URL, not an OS path: always use forward slashes regardless of
+  // the platform (path.join would use backslashes on Windows, breaking the
+  // resulting URL and any later parsing of it, e.g. in deleteDocument).
+  const rest = oldPath.slice(pivot.length - 1).replace(/\\/g, '/');
+  const base = filesPath.replace(/\/+$/, '');
+  return `${base}${rest.startsWith('/') ? rest : '/' + rest}`;
 };
 
 exports.getAllDocuments = async () => {
@@ -46,10 +49,12 @@ exports.downloadDocument = async (id) => {
   const doc = await Document.findByPk(id);
   if (!doc) return null;
 
-  doc.downloads += 1; 
-  await doc.save();   
-
   return doc;
+};
+
+// * Only called once the file has actually been served successfully
+exports.incrementDownloads = async (id) => {
+  await Document.increment('downloads', { where: { id } });
 };
 
 // * Fetch all document categories
@@ -75,13 +80,18 @@ exports.deleteDocument = async (id) => {
   if (!document) {
     throw new NotFoundError("Document not found");
   }
-  const rel = document.storage_path.split('\\files\\')[1];
-  console.log(rel);
-  console.log(process.env.PIVOT);
+  // * Normalize to forward slashes first so this works regardless of which
+  // platform originally wrote storage_path (see changePath).
+  const normalized = document.storage_path.replace(/\\/g, '/');
+  const rel = normalized.split('/files/')[1];
   const absoluteUrl = path.join(process.env.PIVOT, rel);
 
-  fs.unlinkSync(absoluteUrl);
+  try {
+    fs.unlinkSync(absoluteUrl);
+  } catch (err) {
+    // * If the file is already gone, still let the DB record be cleaned up
+    if (err.code !== 'ENOENT') throw err;
+  }
 
   await document.destroy();
-
 };

@@ -86,7 +86,7 @@ exports.login = async (req, res, next) => {
     // * Generate new access and refresh tokens
     const { accessToken, refreshToken } = await authService.createToken(user);
 
-    return res.status(201).json({
+    return res.status(200).json({
       accessToken,
       refreshToken,
       user: {
@@ -104,14 +104,14 @@ exports.login = async (req, res, next) => {
 // * Exchange refresh token for new access token
 exports.refresh = async (req, res, next) => {
   try {
-    const { refreshToken } = req.body;
+    const { refresh_token: refreshToken } = req.body;
 
     // ! Ensure refresh token is provided
     if (!refreshToken)
       return res.status(400).json({ error: 'refreshToken required' });
 
     const accesToken = await authService.refresh(refreshToken);
-    return res.status(201).json({ accesToken });
+    return res.status(200).json({ accesToken });
   } catch (err) {
     next(err);
   }
@@ -120,7 +120,7 @@ exports.refresh = async (req, res, next) => {
 // * Invalidate refresh token on logout
 exports.logout = async (req, res, next) => {
   try {
-    const { refreshToken } = req.body;
+    const { refresh_token: refreshToken } = req.body;
 
     // ! Ensure refresh token is provided
     if (!refreshToken)
@@ -140,7 +140,7 @@ exports.me = async (req, res, next) => {
 
     // ? Fetch user details by JWT subject
     const user = await authService.getCurrentUser(sub);
-    return res.status(201).json({ user });
+    return res.status(200).json({ user });
   } catch (err) {
     next(err);
   }
@@ -149,7 +149,7 @@ exports.me = async (req, res, next) => {
 // * Reset password using token
 exports.resetPassword = async (req, res, next) => {
   try {
-    const { token, newPassword } = req.body;
+    const { token, new_password: newPassword } = req.body;
 
     // Input validation with specific error messages
     if (!token) {

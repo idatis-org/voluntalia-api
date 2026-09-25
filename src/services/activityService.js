@@ -53,11 +53,11 @@ exports.deleteActivity = async (id) => {
   await Activity.destroy({ where: { id } });
 };
 
-// ! Assign a single volunteer to an activity (replaces any existing)
+// ! Add a volunteer to an activity (keeps any already assigned)
 exports.assignActivity = async (id, volunteer_id) => {
   const activity = await Activity.findByPk(id);
   if (!activity) throw new NotFoundError('Activity not found');
-  await activity.setVolunteers([volunteer_id]);
+  await activity.addVolunteer(volunteer_id);
 };
 
 // ! Remove a specific volunteer from an activity

@@ -22,7 +22,28 @@ Antes de iniciar, asegúrate de tener instalado:
 
 ---
 
-## 🐘 Configuración de PostgreSQL con Docker
+## 🔑 Variables de entorno
+
+Copia `.env.example` a `.env` y rellena los valores:
+
+```bash
+cp .env.example .env
+```
+
+`.env` nunca debe subirse a git (ya está en `.gitignore`).
+
+## 🚀 Levantar todo el stack con un solo comando (alternativa)
+
+Si prefieres no configurar cada pieza por separado, hay un `docker-compose.yml` en la raíz del workspace (un nivel por encima de este repo) que levanta Postgres, la API, el frontend y el servidor de archivos juntos, con la red interna ya resuelta:
+
+```bash
+cd ..
+docker-compose up --build
+```
+
+El resto de esta guía (pasos manuales de Postgres, migraciones, etc.) sigue siendo válida si prefieres levantar cada pieza por separado o correr la API en local con `npm run dev`.
+
+## 🐘 Configuración de PostgreSQL con Docker (manual)
 
 1. Descarga e instala **Docker Desktop** desde la [página oficial](https://www.docker.com/products/docker-desktop/).  
 2. Abre una terminal y ejecuta el siguiente comando para levantar un contenedor de PostgreSQL en el puerto `5432`:
@@ -71,6 +92,10 @@ Nosotros ya tenemos configuraciones para esto, las podéis crear vosotros o nos 
 ### &nbsp;&nbsp;&nbsp;&nbsp; 📂 Manage files
 
 Tenemos un archivo de configuracion y guia paso a paso `Manage_files_configuration.md` donde se explica como crear el contenedor y la estructura de cada uno de los archivos para despachar archivos en la aplicación
+
+### &nbsp;&nbsp;&nbsp;&nbsp; 📮 Postman
+
+`VoluntALIA.postman_collection.json` trae todos los endpoints de la API ya organizados por recurso (Auth, User, Notification, Document, Activity, Skill, WorkLog, Dashboard), listos para importar en Postman y probar sin escribir las peticiones a mano.
 
 ---
 
